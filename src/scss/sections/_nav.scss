@@ -1,0 +1,34 @@
+.nav{
+  background-color: $logoColor;
+  padding: 20px 10px;
+
+
+  &__logo{
+    color: $mint;
+    font-family: $logo-font;
+    font-weight: bold;
+    font-size: 3rem;
+
+    &--R{
+      color: $darkMint;
+      font-family: $logo-font;
+      font-weight: bold;
+      font-size: 4rem;
+
+    }
+  }
+
+
+  &__links{
+    display: flex;
+    justify-content: space-between;
+    margin: 20px 0;
+  }
+
+  &__link{
+    text-decoration: none;
+    font-family: $title-font;
+    color: $fontColor;
+    font-weight: bold;
+  }
+}
