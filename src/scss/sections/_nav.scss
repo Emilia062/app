@@ -1,34 +1,50 @@
-.nav{
-  background-color: $logoColor;
+.nav {
+  background-color: $logoBackgroundcolor;
   padding: 20px 10px;
 
+  &__logo {
+    display: flex;
+    align-items: center;
 
-  &__logo{
-    color: $mint;
-    font-family: $logo-font;
-    font-weight: bold;
-    font-size: 3rem;
+    &--rosemary {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+    }
 
-    &--R{
-      color: $darkMint;
+    &--R {
+      color: #1d3131;
       font-family: $logo-font;
       font-weight: bold;
-      font-size: 4rem;
+      font-size: 8rem;
+    }
 
+    &--second-part {
+      color: $mint;
+      font-family: $logo-font;
+      font-weight: bold;
+      font-size: 3rem;
     }
   }
 
-
-  &__links{
+  &__links {
     display: flex;
     justify-content: space-between;
     margin: 20px 0;
   }
 
-  &__link{
+  &__link {
     text-decoration: none;
-    font-family: $title-font;
+    font-family: $main-font;
     color: $fontColor;
     font-weight: bold;
+    font-size: 1.2rem;
+    margin: 10px;
+
+    &:active{
+        color: $lightGreen;
+      }
+    }
   }
-}
+
+

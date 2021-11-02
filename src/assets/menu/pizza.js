@@ -1,0 +1,35 @@
+const pizza =[
+    {title: "Margerita",
+    ingredients: "sos pomidorowy, mozarella, oregano",
+price: 17},
+{title: "Funghi",
+ingredients: "sos pomidorowy, mozarella, pieczarki",
+price: 18},
+{title: "Capricciosa",
+ingredients: "sos pomidorowy, mozarella, prosciutto cotto, pieczorki",
+price: 20},
+{title: "Napoli",
+ingredients: "sos pomidorowy, mozarella, salami napoli, pomidor świeży",
+price: 20},
+{title: "Pomodoro",
+ingredients: "sos pomidorowy, mozarella, prosciutto cotto, pomidor zapiekany, czerwona cebula, oregano",
+price: 22},
+{title: "Valeriana",
+ingredients: "sos pomidorowy, mozarella, prosciutto cotto, czarne oliwki, roszponka",
+price: 20},
+{title: "Salami picante",
+ingredients: "sos pomidorowy, mozarella, salami picante, czerwona cebula, czarne oliwki",
+price: 24},
+{title: "Diavolo",
+ingredients: "sos pomidorowy, mozarella, salami picante, mascarpone, papryczki chili, rukola",
+price: 22},
+{title: "Nicejska",
+ingredients: "sos pomidorowy, mozarella, tuńczyk, czarne oliwki, kapary",
+price: 21},
+{title: "Tuna",
+ingredients: "sos pomidorowy, mozarella, tuńczyk, czerwona cebula, papryczki chili, ogórek konswerowy",
+price: 21}
+];
+
+export default pizza;
+

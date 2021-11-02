@@ -1,0 +1,10 @@
+.footer {
+  font-family: $main-font;
+  color: $fontColor;
+  background-color: $logoBackgroundcolor;
+
+  &__contact {
+    display: flex;
+    justify-content: space-around;
+  }
+}
