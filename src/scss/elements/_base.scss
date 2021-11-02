@@ -7,9 +7,9 @@ html {
 }
 
 #root {
-  font-family: 'Lora', serif;
+  font-family: $main-font;
   font-size: 1.5rem;
-  background-color: rgb(201,228,175);
+  background-color: $backgroundColor;
 }
 
 .container {
