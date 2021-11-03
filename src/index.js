@@ -17,14 +17,12 @@ import Kitchen from "./Kitchen";
 
 ReactDOM.render(
   <React.StrictMode>
-      {/*<App />*/}
-      {/*<Panel/>*/}
       <HashRouter>
           <>
               <Route exact path='/' component={App} />
               <Route exact path='/panel' component={Panel} />
-              <Route exact path='/panel/waiter' component={Waiter} />
-              <Route exact path='/panel/kitchen' component={Kitchen} />
+              <Route path='/panel/waiter' component={Waiter} />
+              <Route path='/panel/kitchen' component={Kitchen} />
           </>
       </HashRouter>
   </React.StrictMode>,

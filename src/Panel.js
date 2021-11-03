@@ -4,6 +4,7 @@ import Kitchen from "./Kitchen";
 
 const Panel = () => {
     const [password, setPassword] = useState("")
+    const [name, setName] = useState("")
     const [state, setState] = useState("closed")
 
     const handlePassword = () => {
@@ -20,8 +21,9 @@ const Panel = () => {
             <h2>Panel administracyjny</h2>
             {state === "closed" && (
                 <>
-                <input type={"password"} onChange={e => setPassword(e.target.value)}></input>
-                <button onClick={handlePassword}>Wyślij</button>
+                    <input type={"text"} onChange={e => setName(e.target.value)}/>
+                    <input type={"password"} onChange={e => setPassword(e.target.value)}/>
+                    <button onClick={handlePassword}>Wyślij</button>
                     {password !== "123" || password !== "456" || password !== "" && (
                         <div> Hasło nieprawidłowe</div>
                     )}
@@ -33,14 +35,12 @@ const Panel = () => {
 
             {state === "openWaiter" && (
                 <>
-                    <h1>działa</h1>
-                    <Waiter/>
+                    <Waiter name={name}/>
                 </>
             )}
             {state === "openKitchen" && (
                 <>
-                    <h1>Działa</h1>
-                    <Kitchen/>
+                    <Kitchen name={name}/>
                 </>
             )}
         </div>

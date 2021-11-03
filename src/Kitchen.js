@@ -1,8 +1,9 @@
 import React from 'react';
 
-const Kitchen = () => {
+const Kitchen = (props) => {
     return (
         <>
+            <span>Witaj {props.name}! Owocnej pracy!</span>
             <h1> Kuchnia</h1>
             <h2>Zamówienia</h2>
             <div>nr stolika</div>

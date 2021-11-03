@@ -1,15 +1,96 @@
-import React, {useState}from 'react';
+import React, {useEffect, useState} from 'react';
 
-import pizza from './assets/menu/pizza.js';
-import pasta from './assets/menu/pasta';
-import foccacia from "./assets/menu/foccacia";
-import salads from "./assets/menu/salads";
-import beverages from "./assets/menu/bevarages"
 import Product from "./Product";
 import Order from "./Order";
+import {db} from "./firebase"
 
 const Menu = () => {
-    const [order,setOrder] = useState([])
+    const [pickedItems,setPickedItems] = useState([])
+    const [pizza, setPizza] = useState([])
+    const [pasta, setPasta] = useState([])
+    const [salads, setSalads] = useState([])
+    const [foccacia, setFoccacia] = useState([])
+    const [beverages, setBeverages] = useState([])
+
+    useEffect(() => {
+        db.collection("pizza")
+            .get()
+            .then((querySnapshot) => {
+            querySnapshot.forEach((doc) => {
+                setPizza((state) => [
+                    ...state,
+                    {
+                        ...doc.data(),
+                        id: doc.id,
+                    }
+                ])
+            });
+        });
+    }, []);
+
+    useEffect(() => {
+        db.collection("pasta")
+            .get()
+            .then((querySnapshot) => {
+                querySnapshot.forEach((doc) => {
+                    setPasta((state) => [
+                        ...state,
+                        {
+                            ...doc.data(),
+                            id: doc.id,
+                        }
+                    ])
+                });
+            });
+    }, []);
+
+    useEffect(() => {
+        db.collection("salads")
+            .get()
+            .then((querySnapshot) => {
+                querySnapshot.forEach((doc) => {
+                    setSalads((state) => [
+                        ...state,
+                        {
+                            ...doc.data(),
+                            id: doc.id,
+                        }
+                    ])
+                });
+            });
+    }, []);
+
+    useEffect(() => {
+        db.collection("foccacia")
+            .get()
+            .then((querySnapshot) => {
+                querySnapshot.forEach((doc) => {
+                    setFoccacia((state) => [
+                        ...state,
+                        {
+                            ...doc.data(),
+                            id: doc.id,
+                        }
+                    ])
+                });
+            });
+    }, []);
+
+    useEffect(() => {
+        db.collection("beverages")
+            .get()
+            .then((querySnapshot) => {
+                querySnapshot.forEach((doc) => {
+                    setBeverages((state) => [
+                        ...state,
+                        {
+                            ...doc.data(),
+                            id: doc.id,
+                        }
+                    ])
+                });
+            });
+    }, []);
 
     return (
         <form>
@@ -18,7 +99,7 @@ const Menu = () => {
                return(
                    <div key={index}>
                        <Product title={item.title} ingredients={item.ingredients}
-                                price={item.price} order={order} setOrder={setOrder}/>
+                                price={item.price} pickedItems={pickedItems} setPickedItems={setPickedItems}/>
                    </div>
                )
             })}
@@ -27,7 +108,7 @@ const Menu = () => {
                 return (
                     <div key={index}>
                         <Product title={item.title} ingredients={item.ingredients}
-                                 price={item.price} order={order} setOrder={setOrder} />
+                                 price={item.price} pickedItems={pickedItems} setPickedItems={setPickedItems} />
                     </div>
                 )
             })}
@@ -36,7 +117,7 @@ const Menu = () => {
                 return (
                     <div key={index}>
                         <Product title={item.title} ingredients={item.ingredients}
-                                 price={item.price} order={order} setOrder={setOrder}/>
+                                 price={item.price} pickedItems={pickedItems} setPickedItems={setPickedItems}/>
                     </div>
                 )
             })}
@@ -45,7 +126,7 @@ const Menu = () => {
                 return (
                     <div key={index}>
                         <Product title={item.title} ingredients={item.ingredients}
-                                 price={item.price} order={order} setOrder={setOrder}/>
+                                 price={item.price} pickedItems={pickedItems} setPickedItems={setPickedItems}/>
                     </div>
                 )
             })}
@@ -54,11 +135,11 @@ const Menu = () => {
                 return (
                     <div key={index}>
                         <Product title={item.title} ingredients={item.description}
-                                 price={item.price} order={order} setOrder={setOrder}/>
+                                 price={item.price} pickedItems={pickedItems} setPickedItems={setPickedItems}/>
                     </div>
                 )
             })}
-            <Order/>
+            <Order pickedItems={pickedItems}/>
         </form>
     );
 };
