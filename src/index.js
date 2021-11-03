@@ -14,6 +14,7 @@ import Panel from "./Panel";
 import Waiter from "./Waiter";
 import Kitchen from "./Kitchen";
 
+export const tableID = 1;
 
 ReactDOM.render(
   <React.StrictMode>

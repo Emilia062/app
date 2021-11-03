@@ -2,10 +2,11 @@ import React, {useEffect, useState} from 'react';
 
 import Product from "./Product";
 import Order from "./Order";
-import {db} from "./firebase"
+import {db} from "./firebase";
 
 const Menu = () => {
     const [pickedItems,setPickedItems] = useState([])
+    const [status, setStatus] = useState("active");
     const [pizza, setPizza] = useState([])
     const [pasta, setPasta] = useState([])
     const [salads, setSalads] = useState([])
@@ -99,7 +100,7 @@ const Menu = () => {
                return(
                    <div key={index}>
                        <Product title={item.title} ingredients={item.ingredients}
-                                price={item.price} pickedItems={pickedItems} setPickedItems={setPickedItems}/>
+                                price={item.price} pickedItems={pickedItems} setPickedItems={setPickedItems} status={status}/>
                    </div>
                )
             })}
@@ -108,7 +109,7 @@ const Menu = () => {
                 return (
                     <div key={index}>
                         <Product title={item.title} ingredients={item.ingredients}
-                                 price={item.price} pickedItems={pickedItems} setPickedItems={setPickedItems} />
+                                 price={item.price} pickedItems={pickedItems} setPickedItems={setPickedItems} status={status} />
                     </div>
                 )
             })}
@@ -117,7 +118,7 @@ const Menu = () => {
                 return (
                     <div key={index}>
                         <Product title={item.title} ingredients={item.ingredients}
-                                 price={item.price} pickedItems={pickedItems} setPickedItems={setPickedItems}/>
+                                 price={item.price} pickedItems={pickedItems} setPickedItems={setPickedItems} status={status}/>
                     </div>
                 )
             })}
@@ -135,11 +136,11 @@ const Menu = () => {
                 return (
                     <div key={index}>
                         <Product title={item.title} ingredients={item.description}
-                                 price={item.price} pickedItems={pickedItems} setPickedItems={setPickedItems}/>
+                                 price={item.price} pickedItems={pickedItems} setPickedItems={setPickedItems} status={status}/>
                     </div>
                 )
             })}
-            <Order pickedItems={pickedItems}/>
+            <Order pickedItems={pickedItems} setStatus={setStatus}/>
         </form>
     );
 };

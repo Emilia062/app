@@ -1,9 +1,10 @@
 import React, {useState} from 'react';
 
 const Product = (props) => {
-    const {title, ingredients, price, pickedItems, setPickedItems} = props;
+    const {title, ingredients, price, pickedItems, setPickedItems, status} = props;
     const [state, setState] = useState("closed");
     const [quantity, setQuantity] = useState(0);
+
 
     const handleOpen = () => {
         setState( "open");
@@ -17,21 +18,22 @@ const Product = (props) => {
         setQuantity(e.target.value);
     }
 
-    let sum = quantity * props.price;
-
-
     const handleAdd = (e) => {
         e.preventDefault();
+
         let orderItem = {
             title,
             quantity,
-            sum,
+            sum: quantity * props.price,
+            status,
         }
 
         setPickedItems(state => {
             return [...state, orderItem]
         })
+
         console.log(pickedItems)
+        setState("closed")
     }
 
     return (
@@ -48,11 +50,11 @@ const Product = (props) => {
             )}
                 {state === "open" && (
                     <>
-                        <input type={"number"} value={quantity} placeholder={0} onChange={handleQuantity}/>
+                        <input type={"number"} value={quantity} placeholder={""} onChange={handleQuantity}/>
                         <i className="fas fa-plus" onClick={handleAdd}> </i><p>Dodaj do zamówienia</p>
                         <i className="fas fa-trash" onClick={handleClose}> </i>
                         {quantity !== 0 && (
-                            <strong>{sum} zł</strong>
+                            <strong>{quantity * props.price} zł</strong>
                         )}
                     </>
                 )}

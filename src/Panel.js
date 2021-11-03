@@ -17,19 +17,23 @@ const Panel = () => {
     }
 
     return (
-        <div>
-            <h2>Panel administracyjny</h2>
+        <div className={"panel"}>
+            <h2 className={"panel__title"}>Panel administracyjny</h2>
             {state === "closed" && (
                 <>
-                    <input type={"text"} onChange={e => setName(e.target.value)}/>
-                    <input type={"password"} onChange={e => setPassword(e.target.value)}/>
-                    <button onClick={handlePassword}>Wyślij</button>
-                    {password !== "123" || password !== "456" || password !== "" && (
-                        <div> Hasło nieprawidłowe</div>
-                    )}
-                    {password === "" && (
-                        <div>Wpisz hasło</div>
-                    )}
+                    <div className={"panel__form"}>
+                        <span className={"panel__form--title"} >Wpisz swoje imię</span>
+                        <input type={"text"} onChange={e => setName(e.target.value)} className={"panel__form--input"}/>
+                        <span className={"panel__form--title"}>Wpisz hasło</span>
+                        <input type={"password"} onChange={e => setPassword(e.target.value)} className={"panel__form--input"}/>
+                        <button onClick={handlePassword} className={"panel__button"}>Wyślij</button>
+                        {password === "" && (
+                            <div className={"panel__nopassword"}>Wpisz hasło</div>
+                        )}
+                        {password !== "123" && password !== "456" && (
+                            <div className={"panel__wrongpassword"}> Hasło nieprawidłowe</div>
+                        )}
+                    </div>
                 </>
             )}
 

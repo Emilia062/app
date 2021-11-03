@@ -1,0 +1,11 @@
+.waiter {
+  &__welcome {
+    color: $titleColor;
+
+    &--name{
+      color: $logoBackgroundcolor;
+      font-weight: 700;
+    }
+  }
+
+}
