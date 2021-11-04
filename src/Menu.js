@@ -95,7 +95,7 @@ const Menu = () => {
 
     return (
         <form>
-            <h2 id={"pizza"}>Pizza</h2>
+            <h2 id={pizza}>Pizza</h2>
             {pizza.map((item, index) => {
                return(
                    <div key={index}>
@@ -109,7 +109,7 @@ const Menu = () => {
                 return (
                     <div key={index}>
                         <Product title={item.title} ingredients={item.ingredients}
-                                 price={item.price} pickedItems={pickedItems} setPickedItems={setPickedItems} status={status} />
+                                 price={item.price} pickedItems={pickedItems} setPickedItems={setPickedItems} status={status}/>
                     </div>
                 )
             })}
@@ -127,7 +127,7 @@ const Menu = () => {
                 return (
                     <div key={index}>
                         <Product title={item.title} ingredients={item.ingredients}
-                                 price={item.price} pickedItems={pickedItems} setPickedItems={setPickedItems}/>
+                                 price={item.price} pickedItems={pickedItems} setPickedItems={setPickedItems} status={status}/>
                     </div>
                 )
             })}

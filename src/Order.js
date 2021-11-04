@@ -1,10 +1,10 @@
-import React, {useState} from 'react';
+import React from 'react';
+import PickedItem from "./PickedItem";
 import {db} from "./firebase";
 import {tableID} from "./index";
 
 const Order = (props) => {
     const {pickedItems, setStatus} = props
-    const [statusHelp, setStatusHelp] = useState("active")
 
     let sumTotal = 0;
     pickedItems.map((item) => {
@@ -13,18 +13,11 @@ const Order = (props) => {
         }
     })
 
-    const handleRemove = () => {
-        setStatus("remove");
-    }
-
     const isActive = pickedItems.map((item, index) =>{
         if(item.status === "active" && item.quantity > 0){
             return (
                 <ul key={index}>
-                    <li key={11}>{item.title}</li>
-                    <li key={21}>{item.quantity}</li>
-                    <li key={31}>{item.sum}</li>
-                    <i className="fas fa-trash" key={41} onClick={handleRemove}> </i>
+                    <PickedItem title={item.title} quantity={item.quantity} sum={item.sum}/>
                 </ul>
             )
         }
@@ -34,7 +27,9 @@ const Order = (props) => {
         const date = new Date();
         pickedItems.map(item => {
             if(item.status === "active" && item.quantity > 0){
-                db.collection("orders").add({
+                let ID = Math.floor(Math.random()*(1000-1+1)+1);
+                db.collection("orders").doc(ID.toString()).set({
+                    ID,
                     product: item.title,
                     quantity: item.quantity,
                     sum: item.sum,
@@ -42,11 +37,11 @@ const Order = (props) => {
                     tableID: tableID,
                     date: date.toLocaleString(),
                 })
-                    .then((docRef) => {
-                        console.log("Document written with ID: ", docRef.id);
+                    .then(() => {
+                        console.log("Document successfully written!");
                     })
                     .catch((error) => {
-                        console.error("Error adding document: ", error);
+                        console.error("Error writing document: ", error);
                     });
             }
         })
@@ -54,22 +49,21 @@ const Order = (props) => {
 
     const handleHelp = () => {
         const date = new Date();
-        db.collection("help").add({
+        let ID = Math.floor(Math.random()*(1000-1+1)+1);
+        db.collection("help").doc(ID.toString()).set({
+            ID,
             tableID: tableID,
             msg: "Poproszono o obsługę kelnerską",
             date: date.toLocaleString(),
-            status: statusHelp,
+            status: "active",
         })
-            .then((docRef) => {
-                console.log("Document written with ID: ", docRef.id);
+            .then(() => {
+                console.log("Document successfully written!");
             })
             .catch((error) => {
-                console.error("Error adding document: ", error);
+                console.error("Error writing document: ", error);
             });
     }
-
-
-
 
     return (
                 <div>

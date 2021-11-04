@@ -1,11 +1,18 @@
 import React, {useEffect, useState} from 'react';
 import {db} from "./firebase";
+import Help from "./Help";
 
 
 const Waiter = (props) => {
     const [help, setHelp] = useState([])
-    const [date, setDate] = useState()
-    const [status, setStatus] = useState()
+
+    const toPolish = (status) => {if(status === "completed"){
+        return "Zakończone"
+    } else if(status === "deleted"){
+        return "Usunięte"
+    } else if(status === "active"){
+        return "Aktywny"
+    }}
 
     useEffect(() => {
         db.collection("help")
@@ -26,13 +33,8 @@ const Waiter = (props) => {
     let helpActive = help.map((item,index) => {
         if(item.status === "active"){
             return(
-                <ul key={index}>
-                    <li>{item.msg}</li>
-                    <li>{item.tableID}</li>
-                    <li>{item.date}</li>
-                    <li>{item.status}</li>
-                    <i className="fas fa-check"> </i>
-                    <i className="fas fa-trash"> </i>
+                <ul key={index} className={"row"}>
+                    <Help msg={item.msg} tableID={item.tableID} date={item.date} status={item.status} ID={item.ID}/>
                 </ul>
             )}
         })
@@ -41,10 +43,12 @@ const Waiter = (props) => {
         if(item.status === "deleted"){
             return(
                 <ul key={index}>
+                    <li>{item.ID}</li>
                     <li>{item.msg}</li>
                     <li>{item.tableID}</li>
                     <li>{item.date}</li>
-                    <li>{item.status}</li>
+                    <li>{toPolish(item.status)}</li>
+                    <li>{item.dateEnd}</li>
                 </ul>
             )}
     })
@@ -53,10 +57,12 @@ const Waiter = (props) => {
         if(item.status === "completed"){
             return(
                 <ul key={index}>
+                    <li>{item.ID}</li>
                     <li>{item.msg}</li>
                     <li>{item.tableID}</li>
                     <li>{item.date}</li>
-                    <li>{item.status}</li>
+                    <li>{toPolish(item.status)}</li>
+                    <li>{item.dateEnd}</li>
                 </ul>
             )}
     })
@@ -65,16 +71,18 @@ const Waiter = (props) => {
         <>
             <span className={"waiter__welcome"}>Witaj <span className={"waiter__welcome--name"}>{props.name}</span>! Owocnej pracy!</span>
             <h1 className={"waiter__title"}> Osługa kelnerska</h1>
-            <div>Prośby o pomoc</div>
-            <div>nr stolika</div>
-            <div>godzina</div>
-            <div>anuluj</div>
-            <div>zakończ</div>
+            <div className={"container"}>Prośby o pomoc</div>
+            <div className={"row"}>
+            <div className={"col-3"}>nr stolika</div>
+            <div className={"col-3"}>godzina</div>
+            <div className={"col-3"}>anuluj</div>
+            <div className={"col-3"}>zakończ</div>
+            </div>
             {helpActive}
-            <div>
-                <span>Pomoc zakończona</span>
+            <div className={"row"}>
+                <span className={"col-6"}>Pomoc zakończona</span>
                 {helpCompleted}
-                <span>Pomoc anulowana</span>
+                <span className={"col-6"}>Pomoc anulowana</span>
                 {helpDeleted}
             </div>
 

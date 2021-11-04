@@ -15,7 +15,7 @@ const Product = (props) => {
     }
 
     const handleQuantity = (e) =>{
-        setQuantity(e.target.value);
+        setQuantity(parseInt(e.target.value));
     }
 
     const handleAdd = (e) => {
@@ -23,7 +23,7 @@ const Product = (props) => {
 
         let orderItem = {
             title,
-            quantity,
+            quantity: quantity,
             sum: quantity * props.price,
             status,
         }
@@ -50,7 +50,7 @@ const Product = (props) => {
             )}
                 {state === "open" && (
                     <>
-                        <input type={"number"} value={quantity} placeholder={""} onChange={handleQuantity}/>
+                        <input type={"number"} value={quantity} placeholder={" "} onChange={handleQuantity}/>
                         <i className="fas fa-plus" onClick={handleAdd}> </i><p>Dodaj do zamówienia</p>
                         <i className="fas fa-trash" onClick={handleClose}> </i>
                         {quantity !== 0 && (

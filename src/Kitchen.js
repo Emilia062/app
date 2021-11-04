@@ -1,8 +1,17 @@
 import React, {useEffect, useState} from 'react';
 import {db} from "./firebase";
+import Dish from "./Dish"
 
 const Kitchen = (props) => {
     const [orders, setOrders] = useState([])
+
+    const toPolish = (status) => {if(status === "completed"){
+        return "Zakończone"
+    } else if(status === "deleted"){
+        return "Usunięte"
+    } else if(status === "active"){
+        return "Aktywny"
+    }}
 
     useEffect(() => {
         db.collection("orders")
@@ -20,17 +29,12 @@ const Kitchen = (props) => {
             });
     }, []);
 
-    let ordersActive = orders.map((item, index) => {
+    let ordersActive = orders.map((item) => {
         if(item.status === "active"){
             return(
-                <ul key={index}>
-                    <li>{item.tableID}</li>
-                    <li>{item.product}</li>
-                    <li>{item.quantity}</li>
-                    <li>{item.status}</li>
-                    <li>{item.date}</li>
-                    <i className="fas fa-check"></i>
-                    <i className="fas fa-trash"></i>
+                <ul>
+                    <Dish ID={item.ID} tableID={item.tableID} product={item.product} quantity={item.quantity} status={item.status}
+                          date={item.date}/>
                 </ul>
             )}
     })
@@ -39,11 +43,12 @@ const Kitchen = (props) => {
         if(item.status === "deleted"){
             return(
                 <ul key={index}>
+                    <li>{item.ID}</li>
+                    <li>{item.msg}</li>
                     <li>{item.tableID}</li>
-                    <li>{item.product}</li>
-                    <li>{item.quantity}</li>
-                    <li>{item.status}</li>
                     <li>{item.date}</li>
+                    <li>{toPolish(item.status)}</li>
+                    <li>{item.dateEnd}</li>
                 </ul>
             )}
     })
@@ -52,11 +57,12 @@ const Kitchen = (props) => {
         if(item.status === "completed"){
             return(
                 <ul key={index}>
+                    <li>{item.ID}</li>
+                    <li>{item.msg}</li>
                     <li>{item.tableID}</li>
-                    <li>{item.product}</li>
-                    <li>{item.quantity}</li>
-                    <li>{item.status}</li>
                     <li>{item.date}</li>
+                    <li>{toPolish(item.status)}</li>
+                    <li>{item.dateEnd}</li>
                 </ul>
             )}
     })

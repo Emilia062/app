@@ -8,8 +8,9 @@ html {
 
 #root {
   font-family: $main-font;
+  color: $fontColor;
   font-size: 1.5rem;
-  background-color: $backgroundColor;
+  background-color: #003768;
 }
 
 .container {
