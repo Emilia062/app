@@ -4,7 +4,12 @@ import Help from "./Help";
 
 
 const Waiter = (props) => {
-    const [help, setHelp] = useState([])
+    // const [help, setHelp] = useState([])
+    const [helpActive, setHelpActive] = useState([])
+    const [helpDeleted, setHelpDeleted] = useState([])
+    const [helpCompleted, setHelpCompleted] = useState([])
+
+    console.log("II")
 
     const toPolish = (status) => {if(status === "completed"){
         return "Zakończone"
@@ -14,12 +19,28 @@ const Waiter = (props) => {
         return "Aktywny"
     }}
 
+    // useEffect(() => {
+    //     db.collection("help")
+    //         .get()
+    //         .then((querySnapshot) => {
+    //             querySnapshot.forEach((doc) => {
+    //                 setHelp((state) => [
+    //                     ...state,
+    //                     {
+    //                         ...doc.data(),
+    //                         id: doc.id,
+    //                     }
+    //                 ])
+    //             });
+    //         });
+    // }, [])
+
     useEffect(() => {
-        db.collection("help")
-            .get()
-            .then((querySnapshot) => {
+        setHelpActive([]);
+        db.collection("help").where("status", "==", "active")
+            .onSnapshot((querySnapshot) => {
                 querySnapshot.forEach((doc) => {
-                    setHelp((state) => [
+                    setHelpActive((state) => [
                         ...state,
                         {
                             ...doc.data(),
@@ -30,17 +51,63 @@ const Waiter = (props) => {
             });
     }, [])
 
-    let helpActive = help.map((item,index) => {
-        if(item.status === "active"){
+    useEffect(() => {
+        setHelpCompleted([]);
+        db.collection("help").where("status", "==", "completed")
+            .onSnapshot((querySnapshot) => {
+                querySnapshot.forEach((doc) => {
+                    setHelpCompleted((state) => [
+                        ...state,
+                        {
+                            ...doc.data(),
+                            id: doc.id,
+                        }
+                    ])
+                });
+            });
+    }, [])
+
+    useEffect(() => {
+        setHelpDeleted([]);
+        db.collection("help").where("status", "==", "deleted")
+            .onSnapshot((querySnapshot) => {
+                querySnapshot.forEach((doc) => {
+                    setHelpDeleted((state) => [
+                        ...state,
+                        {
+                            ...doc.data(),
+                            id: doc.id,
+                        }
+                    ])
+                });
+            });
+    },[])
+    //
+    // const helpActive = help.filter((item) => {
+    //     return item.status === "active"
+    // })
+    //
+    // const helpCompleted = help.filter((item) => {
+    //     return item.status === "completed"
+    // })
+
+    // const helpDeleted = help.filter((item) => {
+    //     return item.status === "deleted"
+    // })
+
+    console.log(`Usunięte!:${helpDeleted}`)
+    console.log(`Zakończone: ${helpCompleted}`)
+    console.log(`Aktywne: ${helpActive}`)
+
+    let helpActiveJSX = helpActive.map((item,index) => {
             return(
                 <ul key={index} className={"row"}>
                     <Help msg={item.msg} tableID={item.tableID} date={item.date} status={item.status} ID={item.ID}/>
                 </ul>
-            )}
+            )
         })
 
-    let helpDeleted = help.map((item, index) => {
-        if(item.status === "deleted"){
+    let helpDeletedJSX = helpDeleted.map((item, index) => {
             return(
                 <ul key={index}>
                     <li>{item.ID}</li>
@@ -50,11 +117,10 @@ const Waiter = (props) => {
                     <li>{toPolish(item.status)}</li>
                     <li>{item.dateEnd}</li>
                 </ul>
-            )}
+            )
     })
 
-    let helpCompleted = help.map((item, index) => {
-        if(item.status === "completed"){
+    let helpCompletedJSX = helpCompleted.map((item, index) => {
             return(
                 <ul key={index}>
                     <li>{item.ID}</li>
@@ -64,7 +130,7 @@ const Waiter = (props) => {
                     <li>{toPolish(item.status)}</li>
                     <li>{item.dateEnd}</li>
                 </ul>
-            )}
+            )
     })
 
     return (
@@ -78,12 +144,12 @@ const Waiter = (props) => {
             <div className={"col-3"}>anuluj</div>
             <div className={"col-3"}>zakończ</div>
             </div>
-            {helpActive}
+            {helpActiveJSX}
             <div className={"row"}>
                 <span className={"col-6"}>Pomoc zakończona</span>
-                {helpCompleted}
+                {helpCompletedJSX}
                 <span className={"col-6"}>Pomoc anulowana</span>
-                {helpDeleted}
+                {helpDeletedJSX}
             </div>
 
         </>

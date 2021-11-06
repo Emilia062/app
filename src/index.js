@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import {
+    BrowserRouter,
     HashRouter,
     Route,
     Link,
@@ -15,17 +16,18 @@ import Waiter from "./Waiter";
 import Kitchen from "./Kitchen";
 
 export const tableID = 1;
+const tableParam = "/:table"
 
 ReactDOM.render(
   <React.StrictMode>
-      <HashRouter>
+      <BrowserRouter>
           <>
               <Route exact path='/' component={App} />
               <Route exact path='/panel' component={Panel} />
               <Route path='/panel/waiter' component={Waiter} />
               <Route path='/panel/kitchen' component={Kitchen} />
           </>
-      </HashRouter>
+      </BrowserRouter>
   </React.StrictMode>,
   document.getElementById('root')
 );

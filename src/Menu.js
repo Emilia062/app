@@ -1,17 +1,25 @@
 import React, {useEffect, useState} from 'react';
-
+import {useParams} from "react-router-dom";
 import Product from "./Product";
 import Order from "./Order";
 import {db} from "./firebase";
+import pizza3 from "./assets/pizza3.jpg";
+import pastaFoto from "./assets/pasta.jpg";
+import salad from "./assets/salad.jpg";
+import foccaciaFoto from "./assets/pizza1.jpg";
+import coffee from "./assets/coffee.jpg";
 
 const Menu = () => {
-    const [pickedItems,setPickedItems] = useState([])
+    const [pickedItems,setPickedItems] = useState([]);
     const [status, setStatus] = useState("active");
-    const [pizza, setPizza] = useState([])
-    const [pasta, setPasta] = useState([])
-    const [salads, setSalads] = useState([])
-    const [foccacia, setFoccacia] = useState([])
-    const [beverages, setBeverages] = useState([])
+    const [pizza, setPizza] = useState([]);
+    const [pasta, setPasta] = useState([]);
+    const [salads, setSalads] = useState([]);
+    const [foccacia, setFoccacia] = useState([]);
+    const [beverages, setBeverages] = useState([]);
+
+    // const param = useParams();
+    // console.log(param)
 
     useEffect(() => {
         db.collection("pizza")
@@ -95,7 +103,8 @@ const Menu = () => {
 
     return (
         <form>
-            <h2 id={pizza}>Pizza</h2>
+            <img src={pizza3} alt={"pizza"} className={"section__pic"}/>
+            <h2 id={"pizza"} className={"section__title"}>Pizza</h2>
             {pizza.map((item, index) => {
                return(
                    <div key={index}>
@@ -104,7 +113,8 @@ const Menu = () => {
                    </div>
                )
             })}
-            <h2 id={"pasta"}>Makarony</h2>
+            <img src={pastaFoto} alt={"pasta"} className={"section__pic"}/>
+            <h2 id={"pasta"} className={"section__title"}>Makarony</h2>
             {pasta.map((item, index) => {
                 return (
                     <div key={index}>
@@ -113,7 +123,8 @@ const Menu = () => {
                     </div>
                 )
             })}
-            <h2 id={"foccacia"}>Foccacia</h2>
+            <img src={foccaciaFoto} alt={"foccacia"} className={"section__pic"}/>
+            <h2 id={"foccacia"} className={"section__title"}>Foccacia</h2>
             {foccacia.map((item, index) => {
                 return (
                     <div key={index}>
@@ -122,7 +133,8 @@ const Menu = () => {
                     </div>
                 )
             })}
-            <h2 id={"salads"}>Sałatki</h2>
+            <img src={salad} alt={"salad"} className={"section__pic"}/>
+            <h2 id={"salads"} className={"section__title"}>Sałatki</h2>
             {salads.map((item, index) => {
                 return (
                     <div key={index}>
@@ -131,7 +143,8 @@ const Menu = () => {
                     </div>
                 )
             })}
-            <h2 id={"beverages"}>Kawa i napoje</h2>
+            <img src={coffee} alt={"coffee"} className={"section__pic"}/>
+            <h2 id={"beverages"} className={"section__title"}>Kawa i napoje</h2>
             {beverages.map((item, index) => {
                 return (
                     <div key={index}>

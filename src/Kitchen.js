@@ -3,7 +3,9 @@ import {db} from "./firebase";
 import Dish from "./Dish"
 
 const Kitchen = (props) => {
-    const [orders, setOrders] = useState([])
+    const [ordersActive, setOrdersActive] = useState([]);
+    const [ordersCompleted, setOrdersCompleted] = useState([]);
+    const [ordersDeleted, setOrdersDeleted] = useState([]);
 
     const toPolish = (status) => {if(status === "completed"){
         return "Zakończone"
@@ -12,13 +14,18 @@ const Kitchen = (props) => {
     } else if(status === "active"){
         return "Aktywny"
     }}
+    console.log("I")
+    console.log(ordersActive)
+    console.log(ordersDeleted)
+    console.log(ordersCompleted)
+
 
     useEffect(() => {
-        db.collection("orders")
-            .get()
-            .then((querySnapshot) => {
+        setOrdersActive([]);
+        db.collection("orders").where("status", "==", "active")
+            .onSnapshot((querySnapshot) => {
                 querySnapshot.forEach((doc) => {
-                    setOrders((state) => [
+                    setOrdersActive((state) => [
                         ...state,
                         {
                             ...doc.data(),
@@ -27,20 +34,66 @@ const Kitchen = (props) => {
                     ])
                 });
             });
-    }, []);
+    }, [])
 
-    let ordersActive = orders.map((item) => {
-        if(item.status === "active"){
+    useEffect(() => {
+        setOrdersCompleted([]);
+        db.collection("orders").where("status", "==", "completed")
+            .onSnapshot((querySnapshot) => {
+                querySnapshot.forEach((doc) => {
+                    setOrdersCompleted((state) => [
+                        ...state,
+                        {
+                            ...doc.data(),
+                            id: doc.id,
+                        }
+                    ])
+                });
+            });
+    }, [])
+
+    useEffect(() => {
+        setOrdersDeleted([]);
+        db.collection("orders").where("status", "==", "deleted")
+            .onSnapshot((querySnapshot) => {
+                querySnapshot.forEach((doc) => {
+                    setOrdersDeleted((state) => [
+                        ...state,
+                        {
+                            ...doc.data(),
+                            id: doc.id,
+                        }
+                    ])
+                });
+            });
+    },[])
+
+    // useEffect(() => {
+    //     db.collection("orders")
+    //         .get()
+    //         .then((querySnapshot) => {
+    //             querySnapshot.forEach((doc) => {
+    //                 setOrders((state) => [
+    //                     ...state,
+    //                     {
+    //                         ...doc.data(),
+    //                         id: doc.id,
+    //                     }
+    //                 ])
+    //             });
+    //         });
+    // }, []);
+
+    let ordersActiveJSX = ordersActive.map((item) => {
             return(
                 <ul>
                     <Dish ID={item.ID} tableID={item.tableID} product={item.product} quantity={item.quantity} status={item.status}
                           date={item.date}/>
                 </ul>
-            )}
+            )
     })
 
-    let ordersDeleted = orders.map((item, index) => {
-        if(item.status === "deleted"){
+   let ordersDeletedJSX = ordersDeleted.map((item, index) => {
             return(
                 <ul key={index}>
                     <li>{item.ID}</li>
@@ -50,11 +103,10 @@ const Kitchen = (props) => {
                     <li>{toPolish(item.status)}</li>
                     <li>{item.dateEnd}</li>
                 </ul>
-            )}
+            )
     })
 
-    let ordersCompleted = orders.map((item, index) => {
-        if(item.status === "completed"){
+    let ordersCompletedJSX = ordersCompleted.map((item, index) => {
             return(
                 <ul key={index}>
                     <li>{item.ID}</li>
@@ -64,9 +116,8 @@ const Kitchen = (props) => {
                     <li>{toPolish(item.status)}</li>
                     <li>{item.dateEnd}</li>
                 </ul>
-            )}
+            )
     })
-
 
     return (
         <>
@@ -78,12 +129,12 @@ const Kitchen = (props) => {
             <div>godzina</div>
             <div>anuluj</div>
             <div>zakończ</div>
-            {ordersActive}
+            {ordersActiveJSX}
             <div>
                 <span>Zamówienia zakończone</span>
-                {ordersCompleted}
+                {ordersCompletedJSX}
                 <span>Zamówienia anulowane</span>
-                {ordersDeleted}
+                {ordersDeletedJSX}
             </div>
 
         </>

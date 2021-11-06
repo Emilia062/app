@@ -11,8 +11,16 @@ const Panel = () => {
         if(password === "123"){
             setState("openWaiter")
         }
-        if(password === "456"){
+        if(password === "456") {
             setState("openKitchen")
+        }
+    }
+
+    const passwordMsg = ({password}) => {
+        if(password === "") {
+            return <div className={"panel__nopassword"}>Wpisz hasło</div>
+        } else if (password !== "123" && password !== "456") {
+            return <div className={"panel__wrongpassword"}> Hasło nieprawidłowe</div>
         }
     }
 
@@ -21,19 +29,20 @@ const Panel = () => {
             <h2 className={"panel__title"}>Panel administracyjny</h2>
             {state === "closed" && (
                 <>
-                    <div className={"panel__form"}>
+                    <form className={"panel__form"}>
                         <span className={"panel__form--title"} >Wpisz swoje imię</span>
                         <input type={"text"} onChange={e => setName(e.target.value)} className={"panel__form--input"}/>
                         <span className={"panel__form--title"}>Wpisz hasło</span>
                         <input type={"password"} onChange={e => setPassword(e.target.value)} className={"panel__form--input"}/>
                         <button onClick={handlePassword} className={"panel__button"}>Wyślij</button>
-                        {password === "" && (
-                            <div className={"panel__nopassword"}>Wpisz hasło</div>
-                        )}
-                        {password !== "123" && password !== "456" && (
-                            <div className={"panel__wrongpassword"}> Hasło nieprawidłowe</div>
-                        )}
-                    </div>
+                        {/*{password === "" && (*/}
+                        {/*    <div className={"panel__nopassword"}>Wpisz hasło</div>*/}
+                        {/*)}*/}
+                        {/*{password !== "123" && password !== "456" && (*/}
+                        {/*    <div className={"panel__wrongpassword"}> Hasło nieprawidłowe</div>*/}
+                        {/*)}*/}
+                        {passwordMsg(password)}
+                    </form>
                 </>
             )}
 

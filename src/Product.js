@@ -15,6 +15,9 @@ const Product = (props) => {
     }
 
     const handleQuantity = (e) =>{
+        if(e.target.value === ""){
+            return ""
+        }
         setQuantity(parseInt(e.target.value));
     }
 
@@ -37,28 +40,33 @@ const Product = (props) => {
     }
 
     return (
-        <>
-            <ul>
-                <li>{title}</li>
-                <li>{ingredients}</li>
+        <div className={"section__product"}>
+            <ul className={"product"}>
+                <li className={"product__title"}>{title}</li>
+                <li className={"product__ingredients"}>{ingredients}</li>
             </ul>
-            <span>{price} zł</span>
+            <span className={"product__price"}>{price} zł</span>
             {state === "closed" && (
-                <div onClick={handleOpen}>Zamów!
-                    <i className="fas fa-plus-circle"> </i>
+                <div onClick={handleOpen} className={"product__order"}>Zamów!
+                    <i className="fas fa-plus-circle product__icon"> </i>
                 </div>
             )}
                 {state === "open" && (
-                    <>
-                        <input type={"number"} value={quantity} placeholder={" "} onChange={handleQuantity}/>
-                        <i className="fas fa-plus" onClick={handleAdd}> </i><p>Dodaj do zamówienia</p>
-                        <i className="fas fa-trash" onClick={handleClose}> </i>
+                    <div className={"product__form"}>
+                        <input type={"number"} value={quantity} placeholder={" "} onChange={handleQuantity}
+                               className={"product__input"}/>
+                        <div className={"product__icons"}>
+                            <div className={"product__add"}>
+                            <i className="fas fa-plus product__icon" onClick={handleAdd}></i><p>Dodaj do zamówienia</p>
+                            </div>
+                        <i className="fas fa-trash product__icon" onClick={handleClose}> </i>
+                        </div>
                         {quantity !== 0 && (
-                            <strong>{quantity * props.price} zł</strong>
+                            <div className={"product__sum"}>Suma: {quantity * props.price} zł</div>
                         )}
-                    </>
+                    </div>
                 )}
-        </>
+        </div>
     );
 };
 

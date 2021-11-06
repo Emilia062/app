@@ -6,18 +6,18 @@ const Help = (props) => {
 
     const handleComplete = () => {
         const dateEnd = new Date();
-            const statusChange = db.collection("help").doc(ID.toString());
-            return statusChange.update({
-                status: "completed",
-                dateEnd: dateEnd.toLocaleString(),
+        const statusChange = db.collection("help").doc(ID.toString());
+        return statusChange.update({
+            status: "completed",
+            dateEnd: dateEnd.toLocaleString(),
+        })
+            .then(() => {
+                console.log("Document successfully updated!");
             })
-                .then(() => {
-                    console.log("Document successfully updated!");
-                })
-                .catch((error) => {
-                    console.error("Error updating document: ", error);
-                });
-        }
+            .catch((error) => {
+                console.error("Error updating document: ", error);
+            });
+    }
 
     const handleDelete = () => {
         const dateEnd = new Date();
@@ -44,7 +44,7 @@ const Help = (props) => {
     }}
 
     return (
-        <>
+        <form>
             <li>{ID}</li>
             <li>{msg}</li>
             <li>{tableID}</li>
@@ -52,7 +52,7 @@ const Help = (props) => {
             <li>{toPolish(status)}</li>
             <button onClick={handleComplete}>Pomoc udzielona</button>
             <button onClick={handleDelete}>Anuluj</button>
-        </>
+        </form>
     );
 };
 
