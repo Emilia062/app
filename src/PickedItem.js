@@ -6,10 +6,10 @@ const PickedItem = (props) => {
 
     return (
         <>
-            <li>{title}</li>
-            <li>{quantity}</li>
-            <li>{sum}</li>
-            <i className="fas fa-trash" onClick={handleDeleted}> </i>
+            <li className={"col-3"}>{title}</li>
+            <li className={"col-3"}>{quantity}</li>
+            <li className={"col-3"}>{sum} zł</li>
+            <i className="fas fa-trash col-3" onClick={handleDeleted}> </i>
         </>
     );
 };

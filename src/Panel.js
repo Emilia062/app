@@ -34,7 +34,7 @@ const Panel = () => {
                         <input type={"text"} onChange={e => setName(e.target.value)} className={"panel__form--input"}/>
                         <span className={"panel__form--title"}>Wpisz hasło</span>
                         <input type={"password"} onChange={e => setPassword(e.target.value)} className={"panel__form--input"}/>
-                        <button onClick={handlePassword} className={"panel__button"}>Wyślij</button>
+                        <button onClick={handlePassword} className={"btn"}>Wyślij</button>
                         {/*{password === "" && (*/}
                         {/*    <div className={"panel__nopassword"}>Wpisz hasło</div>*/}
                         {/*)}*/}

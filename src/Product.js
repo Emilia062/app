@@ -55,15 +55,15 @@ const Product = (props) => {
                     <div className={"product__form"}>
                         <input type={"number"} value={quantity} placeholder={" "} onChange={handleQuantity}
                                className={"product__input"}/>
-                        <div className={"product__icons"}>
-                            <div className={"product__add"}>
-                            <i className="fas fa-plus product__icon" onClick={handleAdd}></i><p>Dodaj do zamówienia</p>
-                            </div>
-                        <i className="fas fa-trash product__icon" onClick={handleClose}> </i>
-                        </div>
                         {quantity !== 0 && (
                             <div className={"product__sum"}>Suma: {quantity * props.price} zł</div>
                         )}
+                        <div className={"product__icons"}>
+                            <div className={"product__add"}>
+                            <i className="fas fa-plus product__icon--plus" onClick={handleAdd}></i><p>Dodaj do zamówienia</p>
+                            </div>
+                        <i className="fas fa-trash product__icon" onClick={handleClose}> </i>
+                        </div>
                     </div>
                 )}
         </div>

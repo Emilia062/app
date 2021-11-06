@@ -25,7 +25,7 @@ const Order = (props) => {
     const isActive = pickedItems.map((item, index) =>{
         if(item.status === "active" && item.quantity > 0){
             return (
-                <ul key={index}>
+                <ul key={index} className={"order__row row"}>
                     <PickedItem title={item.title} quantity={item.quantity} sum={item.sum} pickedItems={pickedItems}
                     handleDeleted={handleDeleted} index={index}/>
                 </ul>
@@ -81,22 +81,22 @@ const Order = (props) => {
     }
 
     return (
-                <div>
-                    <div>
-                        <p>Produkt</p>
-                        <p>ilość</p>
-                        <p>cena</p>
-                        <p>usuń</p>
-                    </div>
-                    <ul>
+                <div className={"order"}>
+                    <div className={"order__border container--grid"}>
+                        <ul className={"order__row row"}>
+                            <li className={"col-3"}>Produkt</li>
+                            <li className={"col-3"}>ilość</li>
+                            <li className={"col-3"}>cena</li>
+                            <li className={"col-3"}>usuń</li>
+                        </ul>
                         {isActive}
-                    </ul>
-                    <h2>SUMA</h2>
-                    <h2>
-                        {sumTotal}
-                    </h2>
-                    <button onClick={handleGetOrder}>ZAMÓW</button>
-                    <button onClick={handleHelp}>Poproś o pomoc kelnera</button>
+                    </div>
+                    <h2 className={"order__sum--title"}>SUMA</h2>
+                    <h2 className={"order__sum"}>{sumTotal} zł</h2>
+                    <div className={"order__buttons"}>
+                    <button onClick={handleGetOrder} className={"btn"}>ZAMÓW</button>
+                    <button onClick={handleHelp} className={"btn"}>Poproś o pomoc kelnera</button>
+                    </div>
                 </div>)
 };
 

@@ -4,12 +4,9 @@ import Help from "./Help";
 
 
 const Waiter = (props) => {
-    // const [help, setHelp] = useState([])
     const [helpActive, setHelpActive] = useState([])
     const [helpDeleted, setHelpDeleted] = useState([])
     const [helpCompleted, setHelpCompleted] = useState([])
-
-    console.log("II")
 
     const toPolish = (status) => {if(status === "completed"){
         return "Zakończone"
@@ -18,22 +15,6 @@ const Waiter = (props) => {
     } else if(status === "active"){
         return "Aktywny"
     }}
-
-    // useEffect(() => {
-    //     db.collection("help")
-    //         .get()
-    //         .then((querySnapshot) => {
-    //             querySnapshot.forEach((doc) => {
-    //                 setHelp((state) => [
-    //                     ...state,
-    //                     {
-    //                         ...doc.data(),
-    //                         id: doc.id,
-    //                     }
-    //                 ])
-    //             });
-    //         });
-    // }, [])
 
     useEffect(() => {
         setHelpActive([]);
@@ -82,26 +63,10 @@ const Waiter = (props) => {
                 });
             });
     },[])
-    //
-    // const helpActive = help.filter((item) => {
-    //     return item.status === "active"
-    // })
-    //
-    // const helpCompleted = help.filter((item) => {
-    //     return item.status === "completed"
-    // })
-
-    // const helpDeleted = help.filter((item) => {
-    //     return item.status === "deleted"
-    // })
-
-    console.log(`Usunięte!:${helpDeleted}`)
-    console.log(`Zakończone: ${helpCompleted}`)
-    console.log(`Aktywne: ${helpActive}`)
 
     let helpActiveJSX = helpActive.map((item,index) => {
             return(
-                <ul key={index} className={"row"}>
+                <ul className={"row"} key={index}>
                     <Help msg={item.msg} tableID={item.tableID} date={item.date} status={item.status} ID={item.ID}/>
                 </ul>
             )
@@ -109,50 +74,70 @@ const Waiter = (props) => {
 
     let helpDeletedJSX = helpDeleted.map((item, index) => {
             return(
-                <ul key={index}>
-                    <li>{item.ID}</li>
-                    <li>{item.msg}</li>
-                    <li>{item.tableID}</li>
-                    <li>{item.date}</li>
-                    <li>{toPolish(item.status)}</li>
-                    <li>{item.dateEnd}</li>
+                <ul key={index} className={"row"}>
+                    <li className={"col-2"} key={"a"}>{item.ID}</li>
+                    <li className={"col-2"} key={"b"}>{item.msg}</li>
+                    <li className={"col-2"} key={"c"}>{item.tableID}</li>
+                    <li className={"col-2"} key={"d"}>{item.date}</li>
+                    <li className={"col-2"} key={"e"}>{toPolish(item.status)}</li>
+                    <li className={"col-2"} key={"f"}>{item.dateEnd}</li>
                 </ul>
             )
     })
 
     let helpCompletedJSX = helpCompleted.map((item, index) => {
             return(
-                <ul key={index}>
-                    <li>{item.ID}</li>
-                    <li>{item.msg}</li>
-                    <li>{item.tableID}</li>
-                    <li>{item.date}</li>
-                    <li>{toPolish(item.status)}</li>
-                    <li>{item.dateEnd}</li>
+                <ul key={index} className={"row"}>
+                    <li className={"col-2"} key={"a"}>{item.ID}</li>
+                    <li className={"col-2"} key={"b"}>{item.msg}</li>
+                    <li className={"col-2"} key={"c"}>{item.tableID}</li>
+                    <li className={"col-2"} key={"d"}>{item.date}</li>
+                    <li className={"col-2"} key={"e"}>{toPolish(item.status)}</li>
+                    <li className={"col-2"} key={"f"}>{item.dateEnd}</li>
                 </ul>
             )
     })
 
     return (
-        <>
-            <span className={"waiter__welcome"}>Witaj <span className={"waiter__welcome--name"}>{props.name}</span>! Owocnej pracy!</span>
-            <h1 className={"waiter__title"}> Osługa kelnerska</h1>
-            <div className={"container"}>Prośby o pomoc</div>
-            <div className={"row"}>
-            <div className={"col-3"}>nr stolika</div>
-            <div className={"col-3"}>godzina</div>
-            <div className={"col-3"}>anuluj</div>
-            <div className={"col-3"}>zakończ</div>
+        <div className={"container--grid"}>
+            <div className={"service"}>
+                <span className={"service__welcome"}>Witaj <span className={"service__welcome--name"}>{props.name}</span>! Owocnej pracy!</span>
+                <h1 className={"service__title"}> Obsługa kelnerska</h1>
+                <h3 className={"service__table"}>Prośby o pomoc</h3>
             </div>
+            <ul className={"row table__titles"}>
+                <li className={"col-2"}>ID</li>
+                <li className={"col-2"}>Wiadomość</li>
+                <li className={"col-2"}>Numer stolika</li>
+                <li className={"col-2"}>Data przyjęcia zgłoszenia</li>
+                <li className={"col-2"}>Status</li>
+                <li className={"col-2"}>Zmień status</li>
+            </ul>
             {helpActiveJSX}
-            <div className={"row"}>
-                <span className={"col-6"}>Pomoc zakończona</span>
+            <div>
+                <h3 className={"service__table"}>Pomoc zakończona</h3>
+                <ul className={"row table__titles"}>
+                    <li className={"col-2"}>ID</li>
+                    <li className={"col-2"}>Wiadomość</li>
+                    <li className={"col-2"}>Numer stolika</li>
+                    <li className={"col-2"}>Data przyjęcia zgłoszenia </li>
+                    <li className={"col-2"}>Status</li>
+                    <li className={"col-2"}>Data zakończenia zgłoszenia</li>
+                </ul>
                 {helpCompletedJSX}
-                <span className={"col-6"}>Pomoc anulowana</span>
+                <h3 className={"service__table"}>Pomoc anulowana</h3>
+                <ul className={"row table__titles"}>
+                    <li className={"col-2"}>ID</li>
+                    <li className={"col-2"}>Wiadomość</li>
+                    <li className={"col-2"}>Numer stolika</li>
+                    <li className={"col-2"}>Data przyjęcia zgłoszenia</li>
+                    <li className={"col-2"}>Status</li>
+                    <li className={"col-2"}>Data anulowania zgłoszenia</li>
+                </ul>
                 {helpDeletedJSX}
             </div>
 
-        </>
+        </div>
     );
 };
 

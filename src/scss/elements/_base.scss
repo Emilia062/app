@@ -18,3 +18,41 @@ html {
   margin: 0 auto;
 }
 
+.btn {
+  background-color: $logoBackgroundcolor;
+  color: $fontColor;
+  font-weight: 700;
+  border-radius: 10px;
+  border: 4px solid $titleColor;
+  padding: 10px;
+}
+
+//Grid
+$columns: 12;
+$column-base-width: 100% / $columns;
+
+.container--grid {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 15px;
+
+  .row {
+    display: flex;
+    flex-wrap: wrap;
+
+    [class*=col-] {
+      min-height: 1px;
+      width: $column-base-width;
+      padding: 12px;
+    }
+
+    @for $i from 1 through $columns {
+      .col-#{$i} {
+        width: $column-base-width * $i;
+      }
+    }
+  }
+}
+
+

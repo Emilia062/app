@@ -2,20 +2,19 @@
   background: rgb(11,50,25);
   background: linear-gradient(180deg, rgba(11,50,25,0.8914916308320203) 37%, rgba(36,107,65,0.9475140397956058) 87%);
 
-
   &__header {
 
     &--background {
       width: 100vw;
       height: 370px;
-      position: relative;
+      //position: relative;
     }
   }
 
     &__logo {
       font-family: $logo-font;
       color: #311c00;
-      text-shadow: #3d2300 0.1em 0.1em 0.2em;
+      text-shadow: 2px 2px 15px #3d2300;
       font-weight: bold;
       position: absolute;
       top: 123px;
@@ -28,8 +27,8 @@
     justify-content: space-between;
     align-items: center;
     padding: 20px 0;
+    background: linear-gradient(0deg, rgba(11,50,25,0.8914916308320203) 37%, rgba(36,107,65,0.9475140397956058) 87%);
     box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
-    //box-shadow: #003768;
   }
 
   &__link {

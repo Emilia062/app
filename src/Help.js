@@ -44,15 +44,17 @@ const Help = (props) => {
     }}
 
     return (
-        <form>
-            <li>{ID}</li>
-            <li>{msg}</li>
-            <li>{tableID}</li>
-            <li>{date}</li>
-            <li>{toPolish(status)}</li>
-            <button onClick={handleComplete}>Pomoc udzielona</button>
-            <button onClick={handleDelete}>Anuluj</button>
-        </form>
+        <>
+            <li className={"col-2"}>{ID}</li>
+            <li className={"col-2"}>{msg}</li>
+            <li className={"col-2"}>{tableID}</li>
+            <li className={"col-2"}>{date}</li>
+            <li className={"col-2"}>{toPolish(status)}</li>
+            <div className={"col-2 table__btn"}>
+            <button onClick={handleDelete} className={"btn"}>Anuluj</button>
+            <button onClick={handleComplete} className={"btn"}>Zakończ</button>
+            </div>
+        </>
     );
 };
 

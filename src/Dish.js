@@ -45,14 +45,15 @@ const Dish = (props) => {
 
     return (
         <>
-            <li>{ID}</li>
-            <li>{tableID}</li>
-            <li>{product}</li>
-            <li>{quantity}</li>
-            <li>{toPolish(status)}</li>
-            <li>{date}</li>
-            <i className="fas fa-check" onClick={handleComplete}></i>
-            <i className="fas fa-trash" onClick={handleDelete}></i>
+            <li className={"col-2"}>{ID}</li>
+            <li className={"col-2"}>{tableID}</li>
+            <li className={"col-2"}>{product}</li>
+            <li className={"col-2"}>{quantity}</li>
+            <li className={"col-2"}>{date}</li>
+            <div className={"col-2 table__btn"}>
+                <button onClick={handleDelete} className={"btn"}>Anuluj</button>
+                <button onClick={handleComplete} className={"btn"}>Zakończ</button>
+            </div>
         </>
     );
 };

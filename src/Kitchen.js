@@ -84,9 +84,9 @@ const Kitchen = (props) => {
     //         });
     // }, []);
 
-    let ordersActiveJSX = ordersActive.map((item) => {
+    let ordersActiveJSX = ordersActive.map((item, index) => {
             return(
-                <ul>
+                <ul className={"row"} key={index}>
                     <Dish ID={item.ID} tableID={item.tableID} product={item.product} quantity={item.quantity} status={item.status}
                           date={item.date}/>
                 </ul>
@@ -95,49 +95,51 @@ const Kitchen = (props) => {
 
    let ordersDeletedJSX = ordersDeleted.map((item, index) => {
             return(
-                <ul key={index}>
-                    <li>{item.ID}</li>
-                    <li>{item.msg}</li>
-                    <li>{item.tableID}</li>
-                    <li>{item.date}</li>
-                    <li>{toPolish(item.status)}</li>
-                    <li>{item.dateEnd}</li>
+                <ul key={index} className={"row"}>
+                    <li className={"col-2"}>{item.ID}</li>
+                    <li className={"col-2"}>{item.product}</li>
+                    <li className={"col-2"}>{item.tableID}</li>
+                    <li className={"col-2"}>{item.date}</li>
+                    <li className={"col-2"}>{toPolish(item.status)}</li>
+                    <li className={"col-2"}>{item.dateEnd}</li>
                 </ul>
             )
     })
 
     let ordersCompletedJSX = ordersCompleted.map((item, index) => {
             return(
-                <ul key={index}>
-                    <li>{item.ID}</li>
-                    <li>{item.msg}</li>
-                    <li>{item.tableID}</li>
-                    <li>{item.date}</li>
-                    <li>{toPolish(item.status)}</li>
-                    <li>{item.dateEnd}</li>
+                <ul key={index} className={"row"}>
+                    <li className={"col-2"}>{item.ID}</li>
+                    <li className={"col-2"}>{item.product}</li>
+                    <li className={"col-2"}>{item.tableID}</li>
+                    <li className={"col-2"}>{item.date}</li>
+                    <li className={"col-2"}>{toPolish(item.status)}</li>
+                    <li className={"col-2"}>{item.dateEnd}</li>
                 </ul>
             )
     })
 
     return (
-        <>
-            <span>Witaj {props.name}! Owocnej pracy!</span>
-            <h1> Kuchnia</h1>
-            <h2>Zamówienia</h2>
-            <div>nr stolika</div>
-            <div>Zamówienie</div>
-            <div>godzina</div>
-            <div>anuluj</div>
-            <div>zakończ</div>
-            {ordersActiveJSX}
-            <div>
-                <span>Zamówienia zakończone</span>
-                {ordersCompletedJSX}
-                <span>Zamówienia anulowane</span>
-                {ordersDeletedJSX}
+        <div className={"container--grid"}>
+            <div className={"service"}>
+                <span className={"service__welcome"}>Witaj <span className={"service__welcome--name"}>{props.name}</span>! Owocnej pracy!</span>
+                <h1 className={"service__title"}> Kuchnia</h1>
+                <h3 className={"service__table"}>Zamówienia aktywne</h3>
             </div>
-
-        </>
+            <ul className={"row table__titles"}>
+                <li className={"col-2"}>ID</li>
+                <li className={"col-2"}>Nr stolika</li>
+                <li className={"col-2"}>Zamówiony produkt</li>
+                <li className={"col-2"}>Ilość</li>
+                <li className={"col-2"}>Data przyjęcia zamówienia</li>
+                <li className={"col-2"}>Zmień status zamówienia</li>
+            </ul>
+            {ordersActiveJSX}
+                <h3 className={"service__table"}>Zamówienia zakończone</h3>
+                {ordersCompletedJSX}
+                <h3 className={"service__table"}>Zamówienia anulowane</h3>
+                {ordersDeletedJSX}
+        </div>
     );
 };
 
