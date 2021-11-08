@@ -68,50 +68,42 @@ const Kitchen = (props) => {
             });
     },[])
 
-    // useEffect(() => {
-    //     db.collection("orders")
-    //         .get()
-    //         .then((querySnapshot) => {
-    //             querySnapshot.forEach((doc) => {
-    //                 setOrders((state) => [
-    //                     ...state,
-    //                     {
-    //                         ...doc.data(),
-    //                         id: doc.id,
-    //                     }
-    //                 ])
-    //             });
-    //         });
-    // }, []);
-
-    let ordersActiveJSX = ordersActive.map((item, index) => {
+    let sortOrdersActive = ordersActive.sort((a ,b) => {
+        return b.OrderID - a.OrderID;
+    });
+    let ordersActiveJSX = sortOrdersActive.map((item, index) => {
             return(
-                <ul className={"row"} key={index}>
-                    <Dish ID={item.ID} tableID={item.tableID} product={item.product} quantity={item.quantity} status={item.status}
-                          date={item.date}/>
-                </ul>
+                <form className={"row"} key={index}>
+                    <Dish OrderID={item.OrderID} tableID={item.tableID} product={item.product} quantity={item.quantity}
+                          date={item.date} ID={item.ID}/>
+                </form>
             )
     })
 
-   let ordersDeletedJSX = ordersDeleted.map((item, index) => {
+    let sortOrdersDeleted = ordersDeleted.sort((a,b) => {
+        return a.OrderID - b.OrderID;
+    });
+    let ordersDeletedJSX = sortOrdersDeleted.map((item, index) => {
             return(
                 <ul key={index} className={"row"}>
-                    <li className={"col-2"}>{item.ID}</li>
-                    <li className={"col-2"}>{item.product}</li>
+                    <li className={"col-2"}>{item.OrderID}</li>
                     <li className={"col-2"}>{item.tableID}</li>
+                    <li className={"col-2"}>{item.product}</li>
                     <li className={"col-2"}>{item.date}</li>
                     <li className={"col-2"}>{toPolish(item.status)}</li>
                     <li className={"col-2"}>{item.dateEnd}</li>
                 </ul>
             )
     })
-
-    let ordersCompletedJSX = ordersCompleted.map((item, index) => {
+    let sortOrdersCompleted = ordersCompleted.sort((a,b) => {
+        return a.OrderID - b.OrderID;
+    });
+    let ordersCompletedJSX = sortOrdersCompleted.map((item, index) => {
             return(
                 <ul key={index} className={"row"}>
-                    <li className={"col-2"}>{item.ID}</li>
-                    <li className={"col-2"}>{item.product}</li>
+                    <li className={"col-2"}>{item.OrderID}</li>
                     <li className={"col-2"}>{item.tableID}</li>
+                    <li className={"col-2"}>{item.product}</li>
                     <li className={"col-2"}>{item.date}</li>
                     <li className={"col-2"}>{toPolish(item.status)}</li>
                     <li className={"col-2"}>{item.dateEnd}</li>
@@ -122,7 +114,6 @@ const Kitchen = (props) => {
     return (
         <div className={"container--grid"}>
             <div className={"service"}>
-                <span className={"service__welcome"}>Witaj <span className={"service__welcome--name"}>{props.name}</span>! Owocnej pracy!</span>
                 <h1 className={"service__title"}> Kuchnia</h1>
                 <h3 className={"service__table"}>Zamówienia aktywne</h3>
             </div>
@@ -135,9 +126,25 @@ const Kitchen = (props) => {
                 <li className={"col-2"}>Zmień status zamówienia</li>
             </ul>
             {ordersActiveJSX}
-                <h3 className={"service__table"}>Zamówienia zakończone</h3>
+            <h3 className={"service__table"}>Zamówienia zakończone</h3>
+            <ul className={"row table__titles"}>
+                <li className={"col-2"}>ID</li>
+                <li className={"col-2"}>Nr stolika</li>
+                <li className={"col-2"}>Zamówiony produkt</li>
+                <li className={"col-2"}>Data przyjęcia zamówienia</li>
+                <li className={"col-2"}>Status</li>
+                <li className={"col-2"}>Data zakończenia</li>
+            </ul>
                 {ordersCompletedJSX}
-                <h3 className={"service__table"}>Zamówienia anulowane</h3>
+            <h3 className={"service__table"}>Zamówienia anulowane</h3>
+            <ul className={"row table__titles"}>
+                <li className={"col-2"}>ID</li>
+                <li className={"col-2"}>Nr stolika</li>
+                <li className={"col-2"}>Zamówiony produkt</li>
+                <li className={"col-2"}>Data przyjęcia zamówienia</li>
+                <li className={"col-2"}>Status</li>
+                <li className={"col-2"}>Data anulowania</li>
+            </ul>
                 {ordersDeletedJSX}
         </div>
     );

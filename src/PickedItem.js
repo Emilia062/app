@@ -1,7 +1,19 @@
 import React from 'react';
 
 const PickedItem = (props) => {
-   const {title, quantity, sum, pickedItems, handleDeleted} = props;
+   const {title, quantity, sum, pickedItems, setPickedItems, index} = props;
+    console.log(index);
+
+    let toOrder = [];
+    const handleDeleted = () => {
+        let toOrder = pickedItems.filter((element, i) => {
+            return  i !== index;
+
+        })
+        setPickedItems(toOrder);
+    }
+    console.log(pickedItems)
+    console.log(toOrder);
 
 
     return (

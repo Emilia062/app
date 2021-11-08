@@ -5,23 +5,16 @@ const Product = (props) => {
     const [state, setState] = useState("closed");
     const [quantity, setQuantity] = useState(0);
 
-
     const handleOpen = () => {
         setState( "open");
     }
 
     const handleClose = () => {
         setState("closed");
+        setQuantity(0);
     }
 
-    const handleQuantity = (e) =>{
-        if(e.target.value === ""){
-            return ""
-        }
-        setQuantity(parseInt(e.target.value));
-    }
-
-    const handleAdd = (e) => {
+    const handleAccept = (e) => {
         e.preventDefault();
 
         let orderItem = {
@@ -34,9 +27,20 @@ const Product = (props) => {
         setPickedItems(state => {
             return [...state, orderItem]
         })
-
-        console.log(pickedItems)
+        setQuantity(0);
         setState("closed")
+    }
+
+    const handleAdd = () => {
+        setQuantity(quantity + 1);
+    }
+
+    const handleSubtract = () => {
+        if (quantity === 0){
+            setQuantity(0)
+        } else {
+            setQuantity(quantity - 1);
+        }
     }
 
     return (
@@ -53,14 +57,18 @@ const Product = (props) => {
             )}
                 {state === "open" && (
                     <div className={"product__form"}>
-                        <input type={"number"} value={quantity} placeholder={" "} onChange={handleQuantity}
-                               className={"product__input"}/>
+                        <div className={"product__quantity"}>
+                            <i className="fas fa-plus product__icon--plus" onClick={handleAdd}> </i>
+                            <div>{quantity}</div>
+                            <i className="fas fa-minus product__icon" onClick={handleSubtract}> </i>
+                        </div>
                         {quantity !== 0 && (
                             <div className={"product__sum"}>Suma: {quantity * props.price} zł</div>
                         )}
                         <div className={"product__icons"}>
                             <div className={"product__add"}>
-                            <i className="fas fa-plus product__icon--plus" onClick={handleAdd}></i><p>Dodaj do zamówienia</p>
+                                <i className="fas fa-check product__icon--plus" onClick={handleAccept}> </i>
+                                <p>Dodaj do zamówienia</p>
                             </div>
                         <i className="fas fa-trash product__icon" onClick={handleClose}> </i>
                         </div>

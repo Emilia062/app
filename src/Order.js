@@ -1,19 +1,26 @@
-import React from 'react';
+import React, {useState} from 'react';
 import PickedItem from "./PickedItem";
 import {db} from "./firebase";
 import {tableID} from "./index.js"
 
 
 const Order = (props) => {
-    const {pickedItems, setStatus, param} = props
+    const {pickedItems, setPickedItems, param} = props
+    // const [info, setInfo] = useState([]);
+    //
+    // const infos = [];
 
-    let toOrder= [];
-    const handleDeleted = (e) => {
-        let toOrder = pickedItems.filter((element, index) => {
-            return index !== e.target.index;
-        })
-    }
-    console.log(toOrder);
+    // let toOrder = pickedItems;
+    // const handleDeleted = (e) => {
+    //     let toOrder = pickedItems.filter((element, index) => {
+    //         console.log(element);
+    //         return index !== e.target.index;
+    //
+    //     })
+    //     setPickedItems(toOrder);
+    //     // pickedItems.splice(e.target.index,1)
+    // }
+    // console.log(toOrder);
 
     let sumTotal = 0;
     pickedItems.map((item) => {
@@ -26,8 +33,7 @@ const Order = (props) => {
         if(item.status === "active" && item.quantity > 0){
             return (
                 <ul key={index} className={"order__row row"}>
-                    <PickedItem title={item.title} quantity={item.quantity} sum={item.sum} pickedItems={pickedItems}
-                    handleDeleted={handleDeleted} index={index}/>
+                    <PickedItem title={item.title} quantity={item.quantity} sum={item.sum} pickedItems={pickedItems} setPickedItems={setPickedItems} index={index}/>
                 </ul>
             )
         }
@@ -36,10 +42,12 @@ const Order = (props) => {
     const handleGetOrder = (e) =>{
         e.preventDefault();
         const date = new Date();
+        const OrderID = Math.floor(Math.random()*(1000000000-1+1)+1);
         pickedItems.map(item => {
             if(item.status === "active" && item.quantity > 0){
                 let ID = Math.floor(Math.random()*(1000000000-1+1)+1);
                 db.collection("orders").doc(ID.toString()).set({
+                    OrderID,
                     ID,
                     product: item.title,
                     quantity: item.quantity,
@@ -49,16 +57,17 @@ const Order = (props) => {
                     date: date.toLocaleString(),
                 })
                     .then(() => {
+                        // infos.push("Dziękujemy za zamówienie");
                         console.log("Document successfully written!");
+
                     })
                     .catch((error) => {
                         console.error("Error writing document: ", error);
+                        // infos.push("Błąd przy wysyłaniu zamówienia. Prosimy o kontakt z obsługą")
                     });
             }
         })
-        return (
-            <div> Dziękujemy za zamówienie! </div>
-        )
+        setPickedItems([]);
     }
 
     const handleHelp = (e) => {
@@ -67,18 +76,23 @@ const Order = (props) => {
         let ID = Math.floor(Math.random()*(1000000000-1+1)+1);
         db.collection("help").doc(ID.toString()).set({
             ID,
-            tableID: param,
+            tableID: tableID,
             msg: "Poproszono o obsługę kelnerską",
             date: date.toLocaleString(),
             status: "active",
         })
             .then(() => {
                 console.log("Document successfully written!");
+                // infos.push("Kelner zaraz do Państwa podejdzie");
             })
             .catch((error) => {
                 console.error("Error writing document: ", error);
+                // infos.push("Nie udało się wysłać prośby. Prosimy o kontakt bezpośrednii z obsługą")
             });
     }
+
+    // setInfo(infos);
+    // console.log(infos);
 
     return (
                 <div className={"order"}>
@@ -97,6 +111,9 @@ const Order = (props) => {
                     <button onClick={handleGetOrder} className={"btn"}>ZAMÓW</button>
                     <button onClick={handleHelp} className={"btn"}>Poproś o pomoc kelnera</button>
                     </div>
+                    {/*{info.map(element => {*/}
+                    {/*    return <div>{element}</div>*/}
+                    {/*})}*/}
                 </div>)
 };
 

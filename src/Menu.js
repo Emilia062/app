@@ -1,8 +1,12 @@
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import {useParams} from "react-router-dom";
 import Product from "./Product";
 import Order from "./Order";
-import {db} from "./firebase";
+import {pizza} from "./assets/menu/menu";
+import {menu} from "./assets/menu/menu";
+import {pasta} from "./assets/menu/menu";
+import {salads} from "./assets/menu/menu";
+import {beverages} from "./assets/menu/menu";
 import pizza3 from "./assets/pizza3.jpg";
 import pastaFoto from "./assets/pasta.jpg";
 import salad from "./assets/salad.jpg";
@@ -12,94 +16,27 @@ import coffee from "./assets/coffee.jpg";
 const Menu = () => {
     const [pickedItems,setPickedItems] = useState([]);
     const [status, setStatus] = useState("active");
-    const [pizza, setPizza] = useState([]);
-    const [pasta, setPasta] = useState([]);
-    const [salads, setSalads] = useState([]);
-    const [foccacia, setFoccacia] = useState([]);
-    const [beverages, setBeverages] = useState([]);
 
     // const param = useParams();
     // console.log(param)
 
-    useEffect(() => {
-        db.collection("pizza")
-            .get()
-            .then((querySnapshot) => {
-            querySnapshot.forEach((doc) => {
-                setPizza((state) => [
-                    ...state,
-                    {
-                        ...doc.data(),
-                        id: doc.id,
-                    }
-                ])
-            });
-        });
-    }, []);
+    // useEffect(() => {
+    //     setPizza([]);
+    //     db.collection("pizza")
+    //         .get()
+    //         .then((querySnapshot) => {
+    //             querySnapshot.forEach((doc) => {
+    //                 setPizza((state) => [
+    //                                     ...state,
+    //                                     {
+    //                                         ...doc.data(),
+    //                                         id: doc.id,
+    //                                     }
+    //                                 ])
+    //             });
+    //     });
+    // }, []);
 
-    useEffect(() => {
-        db.collection("pasta")
-            .get()
-            .then((querySnapshot) => {
-                querySnapshot.forEach((doc) => {
-                    setPasta((state) => [
-                        ...state,
-                        {
-                            ...doc.data(),
-                            id: doc.id,
-                        }
-                    ])
-                });
-            });
-    }, []);
-
-    useEffect(() => {
-        db.collection("salads")
-            .get()
-            .then((querySnapshot) => {
-                querySnapshot.forEach((doc) => {
-                    setSalads((state) => [
-                        ...state,
-                        {
-                            ...doc.data(),
-                            id: doc.id,
-                        }
-                    ])
-                });
-            });
-    }, []);
-
-    useEffect(() => {
-        db.collection("foccacia")
-            .get()
-            .then((querySnapshot) => {
-                querySnapshot.forEach((doc) => {
-                    setFoccacia((state) => [
-                        ...state,
-                        {
-                            ...doc.data(),
-                            id: doc.id,
-                        }
-                    ])
-                });
-            });
-    }, []);
-
-    useEffect(() => {
-        db.collection("beverages")
-            .get()
-            .then((querySnapshot) => {
-                querySnapshot.forEach((doc) => {
-                    setBeverages((state) => [
-                        ...state,
-                        {
-                            ...doc.data(),
-                            id: doc.id,
-                        }
-                    ])
-                });
-            });
-    }, []);
 
     return (
         <form>
@@ -125,7 +62,7 @@ const Menu = () => {
             })}
             <img src={foccaciaFoto} alt={"foccacia"} className={"section__pic"}/>
             <h2 id={"foccacia"} className={"section__title"}>Foccacia</h2>
-            {foccacia.map((item, index) => {
+            {menu.map((item, index) => {
                 return (
                     <div key={index}>
                         <Product title={item.title} ingredients={item.ingredients}
@@ -153,7 +90,7 @@ const Menu = () => {
                     </div>
                 )
             })}
-            <Order pickedItems={pickedItems} setStatus={setStatus}/>
+            <Order pickedItems={pickedItems} setPickedItems={setPickedItems}/>
         </form>
     );
 };

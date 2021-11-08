@@ -3,7 +3,7 @@ import {db} from "./firebase";
 import Help from "./Help";
 
 
-const Waiter = (props) => {
+const Waiter = () => {
     const [helpActive, setHelpActive] = useState([])
     const [helpDeleted, setHelpDeleted] = useState([])
     const [helpCompleted, setHelpCompleted] = useState([])
@@ -66,9 +66,9 @@ const Waiter = (props) => {
 
     let helpActiveJSX = helpActive.map((item,index) => {
             return(
-                <ul className={"row"} key={index}>
+                <form className={"row"} key={index}>
                     <Help msg={item.msg} tableID={item.tableID} date={item.date} status={item.status} ID={item.ID}/>
-                </ul>
+                </form>
             )
         })
 
@@ -101,7 +101,6 @@ const Waiter = (props) => {
     return (
         <div className={"container--grid"}>
             <div className={"service"}>
-                <span className={"service__welcome"}>Witaj <span className={"service__welcome--name"}>{props.name}</span>! Owocnej pracy!</span>
                 <h1 className={"service__title"}> Obsługa kelnerska</h1>
                 <h3 className={"service__table"}>Prośby o pomoc</h3>
             </div>

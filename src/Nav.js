@@ -11,11 +11,11 @@ const Nav = () => {
                 <h1 className={"nav__logo"}>Rosmarino</h1>
             </div>
             <div className={"nav__links"}>
-                <Link to="/#pizza" className={"nav__link"}>Pizza</Link>
-                <Link to="/#pasta" className={"nav__link"}>Makarony</Link>
-                <Link to="/#foccacia" className={"nav__link"}>Foccacia</Link>
-                <Link to="/#salads" className={"nav__link"}>Sałatki</Link>
-                <Link to="/#beverages" className={"nav__link"}>Kawy i napoje</Link>
+                <Link to={{hash:"#pizza"}} className={"nav__link"}>Pizza</Link>
+                <Link to={{ hash:"#pasta"}} className={"nav__link"}>Makarony</Link>
+                <Link to={{hash:"#menu"}} className={"nav__link"}>Foccacia</Link>
+                <Link to={{hash:"#salads"}} className={"nav__link"}>Sałatki</Link>
+                <Link to={{hash:"#beverages"}} className={"nav__link"}>Kawy i napoje</Link>
             </div>
         </div>
     );
