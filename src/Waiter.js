@@ -3,10 +3,15 @@ import {db} from "./firebase";
 import Help from "./Help";
 
 
-const Waiter = () => {
+const Waiter = (props) => {
+    const {setState, setName, setPassword} = props
     const [helpActive, setHelpActive] = useState([]);
     const [helpDeleted, setHelpDeleted] = useState([]);
     const [helpCompleted, setHelpCompleted] = useState([]);
+
+    console.log(helpActive)
+    console.log(helpDeleted)
+    console.log(helpCompleted)
 
     const toPolish = (status) => {if(status === "completed"){
         return "Zakończone"
@@ -17,59 +22,53 @@ const Waiter = () => {
     }}
 
     useEffect(() => {
-        setHelpActive([]);
         db.collection("help").where("status", "==", "active")
             .onSnapshot((querySnapshot) => {
+                const t = [];
                 querySnapshot.forEach((doc) => {
-                    setHelpActive((state) => [
-                        ...state,
-                        {
-                            ...doc.data(),
-                            id: doc.id,
-                        }
-                    ])
+                    t.push({
+                        ...doc.data(),
+                        id: doc.id,
+                    });
                 });
+                setHelpActive(t);
             });
-    },[helpActive])
+    },[])
 
 
     useEffect(() => {
-        setHelpCompleted([]);
         db.collection("help").where("status", "==", "completed")
             .onSnapshot((querySnapshot) => {
+                let t = [];
                 querySnapshot.forEach((doc) => {
-                    setHelpCompleted((state) => [
-                        ...state,
-                        {
+                    t.push({
                             ...doc.data(),
                             id: doc.id,
-                        }
-                    ])
+                        });
                 });
+                setHelpCompleted(t);
             });
-    },[helpCompleted])
+    },[])
 
     useEffect(() => {
-        setHelpDeleted([]);
         db.collection("help").where("status", "==", "deleted")
             .onSnapshot((querySnapshot) => {
+                let t = [];
                 querySnapshot.forEach((doc) => {
-                    setHelpDeleted((state) => [
-                        ...state,
-                        {
-                            ...doc.data(),
-                            id: doc.id,
-                        }
-                    ])
+                    t.push({
+                        ...doc.data(),
+                        id: doc.id,
+                    })
                 });
+                setHelpDeleted(t);
             });
-    },[helpDeleted])
+    },[])
 
 
     let helpActiveJSX = helpActive.map((item,index) => {
             return(
                 <form className={"row"} key={index}>
-                    <Help msg={item.msg} tableID={item.tableID} date={item.date} ID={item.ID}/>
+                    <Help msg={item.msg} tableID={item.tableID} date={item.date} ID={item.ID} status={item.status}/>
                 </form>
             )
         })
@@ -100,9 +99,17 @@ const Waiter = () => {
             )
     })
 
+    const handleLogOut = () => {
+        localStorage.removeItem("account");
+        setState("closed");
+        setName("");
+        setPassword("");
+    }
+
     return (
         <div className={"container--grid"}>
             <div className={"service"}>
+                <button className={"btn service__logOut"} onClick={handleLogOut}>Wyloguj</button>
                 <h1 className={"service__title"}> Obsługa kelnerska</h1>
                 <h3 className={"service__table"}>Prośby o pomoc</h3>
             </div>

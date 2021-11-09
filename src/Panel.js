@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import Waiter from "./Waiter";
 import Kitchen from "./Kitchen";
 
@@ -12,11 +12,19 @@ const Panel = () => {
         name,
         password
     }
+    console.log(state)
 
-    if(localStorage.getItem("account") !== null){
-        setName(account.name);
-        setPassword(account.password);
-    }
+    useEffect(() => {
+        if(localStorage.getItem("account") !== null) {
+            let account = JSON.parse(localStorage.getItem("account"));
+            if(account[account.length - 1].name === "kelner"){
+                setState("openWaiter");
+            }
+            if(account[account.length - 1].name === "kuchnia"){
+                setState("openKitchen");
+            }
+        }
+    },[name, password])
 
     function saveAccountToLocalStorage(newObject){
         let dataFromLocalStorage =[];
@@ -33,8 +41,6 @@ const Panel = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        saveAccountToLocalStorage(account);
-        console.log("Zapisano:", account);
 
         const tempErrors= [];
 
@@ -42,7 +48,7 @@ const Panel = () => {
             tempErrors.push("Hasło jest za krótkie")
         }
 
-        if(name !== "kelner" || name !== "kuchnia"){
+        if(name !== "kelner" && name !== "kuchnia"){
             tempErrors.push("Nieprawidłowy login");
         }
 
@@ -59,6 +65,11 @@ const Panel = () => {
             account.name = name;
         }
 
+        if(tempErrors.length === 0){
+            saveAccountToLocalStorage(account);
+            console.log("Zapisano:", account);
+        }
+
         setErrors(tempErrors);
         if(tempErrors.length > 0){
             return;
@@ -67,6 +78,7 @@ const Panel = () => {
 
     return (
         <div className={"panel"}>
+            <h1 className={"logo panel__logo"}>Rosmarino</h1>
             <h2 className={"panel__title"}>Panel administracyjny</h2>
             {state === "closed" && (
                 <>
@@ -87,12 +99,12 @@ const Panel = () => {
 
             {state === "openWaiter" && (
                 <>
-                    <Waiter/>
+                    <Waiter setState={setState} setName={setName} setPassword={setPassword}/>
                 </>
             )}
             {state === "openKitchen" && (
                 <>
-                    <Kitchen/>
+                    <Kitchen setState={setState} setName={setName} setPassword={setPassword}/>
                 </>
             )}
         </div>

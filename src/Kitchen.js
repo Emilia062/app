@@ -2,7 +2,8 @@ import React, {useEffect, useState} from 'react';
 import {db} from "./firebase";
 import Dish from "./Dish"
 
-const Kitchen = () => {
+const Kitchen = (props) => {
+    const {setState, setName, setPassword} = props
     const [ordersActive, setOrdersActive] = useState([]);
     const [ordersCompleted, setOrdersCompleted] = useState([]);
     const [ordersDeleted, setOrdersDeleted] = useState([]);
@@ -21,56 +22,51 @@ const Kitchen = () => {
 
 
     useEffect(() => {
-        setOrdersActive([]);
         db.collection("orders").where("status", "==", "active")
             .onSnapshot((querySnapshot) => {
+                let t = [];
                 querySnapshot.forEach((doc) => {
-                    setOrdersActive((state) => [
-                        ...state,
-                        {
-                            ...doc.data(),
-                            id: doc.id,
-                        }
-                    ])
+                    t.push({
+                        ...doc.data(),
+                        id: doc.id,
+                    })
                 });
+                setOrdersActive(t);
             });
-    }, [ordersActive])
+    }, [])
 
     useEffect(() => {
-        setOrdersCompleted([]);
         db.collection("orders").where("status", "==", "completed")
             .onSnapshot((querySnapshot) => {
+                let t = [];
                 querySnapshot.forEach((doc) => {
-                    setOrdersCompleted((state) => [
-                        ...state,
-                        {
-                            ...doc.data(),
-                            id: doc.id,
-                        }
-                    ])
+                    t.push( {
+                        ...doc.data(),
+                        id: doc.id,
+                    })
                 });
+                setOrdersCompleted(t);
             });
-    }, [ordersCompleted])
+    }, [])
 
     useEffect(() => {
-        setOrdersDeleted([]);
         db.collection("orders").where("status", "==", "deleted")
             .onSnapshot((querySnapshot) => {
+                let t = [];
                 querySnapshot.forEach((doc) => {
-                    setOrdersDeleted((state) => [
-                        ...state,
-                        {
-                            ...doc.data(),
-                            id: doc.id,
-                        }
-                    ])
+                    t.push( {
+                        ...doc.data(),
+                        id: doc.id,
+                    })
                 });
+                setOrdersDeleted(t)
             });
-    },[ordersDeleted])
+    },[])
 
     let sortOrdersActive = ordersActive.sort((a ,b) => {
         return b.OrderID - a.OrderID;
     });
+
     let ordersActiveJSX = sortOrdersActive.map((item, index) => {
             return(
                 <form className={"row"} key={index}>
@@ -111,9 +107,17 @@ const Kitchen = () => {
             )
     })
 
+    const handleLogOut = () => {
+        localStorage.removeItem("account");
+        setState("closed");
+        setName("");
+        setPassword("");
+    }
+
     return (
         <div className={"container--grid"}>
             <div className={"service"}>
+                <button className={"btn service__logOut"} onClick={handleLogOut}>Wyloguj</button>
                 <h1 className={"service__title"}> Kuchnia</h1>
                 <h3 className={"service__table"}>Zamówienia aktywne</h3>
             </div>

@@ -6,21 +6,8 @@ import {tableID} from "./index.js"
 
 const Order = (props) => {
     const {pickedItems, setPickedItems, param} = props
-    // const [info, setInfo] = useState([]);
-    //
-    // const infos = [];
+    const [info, setInfo] = useState([]);
 
-    // let toOrder = pickedItems;
-    // const handleDeleted = (e) => {
-    //     let toOrder = pickedItems.filter((element, index) => {
-    //         console.log(element);
-    //         return index !== e.target.index;
-    //
-    //     })
-    //     setPickedItems(toOrder);
-    //     // pickedItems.splice(e.target.index,1)
-    // }
-    // console.log(toOrder);
 
     let sumTotal = 0;
     pickedItems.map((item) => {
@@ -53,22 +40,21 @@ const Order = (props) => {
                     quantity: item.quantity,
                     sum: item.sum,
                     status: item.status,
-                    tableID: tableID,
+                    tableID: param.table,
                     date: date.toLocaleString(),
                 })
                     .then(() => {
-                        // infos.push("Dziękujemy za zamówienie");
+                       setInfo( ["Dziękujemy za zamówienie"]);
                         console.log("Document successfully written!");
-
                     })
                     .catch((error) => {
                         console.error("Error writing document: ", error);
-                        // infos.push("Błąd przy wysyłaniu zamówienia. Prosimy o kontakt z obsługą")
+                        setInfo( ["Błąd przy wysyłaniu zamówienia. Prosimy o kontakt z obsługą"]);
                     });
             }
         })
         setPickedItems([]);
-    }
+    };
 
     const handleHelp = (e) => {
         e.preventDefault();
@@ -76,23 +62,20 @@ const Order = (props) => {
         let ID = Math.floor(Math.random()*(1000000000-1+1)+1);
         db.collection("help").doc(ID.toString()).set({
             ID,
-            tableID: tableID,
+            tableID: param.table,
             msg: "Poproszono o obsługę kelnerską",
             date: date.toLocaleString(),
             status: "active",
         })
             .then(() => {
                 console.log("Document successfully written!");
-                // infos.push("Kelner zaraz do Państwa podejdzie");
+                setInfo(state => [...state, "Kelner zaraz do Państwa podejdzie"])
             })
             .catch((error) => {
                 console.error("Error writing document: ", error);
-                // infos.push("Nie udało się wysłać prośby. Prosimy o kontakt bezpośrednii z obsługą")
+                setInfo(state => [...state, "Nie udało się wysłać prośby. Prosimy o kontakt bezpośredni z obsługą"]);
             });
-    }
-
-    // setInfo(infos);
-    // console.log(infos);
+    };
 
     return (
                 <div className={"order"}>
@@ -111,9 +94,9 @@ const Order = (props) => {
                     <button onClick={handleGetOrder} className={"btn"}>ZAMÓW</button>
                     <button onClick={handleHelp} className={"btn"}>Poproś o pomoc kelnera</button>
                     </div>
-                    {/*{info.map(element => {*/}
-                    {/*    return <div>{element}</div>*/}
-                    {/*})}*/}
+                    {info.map((element,index) => {
+                        return <div key={index} className={"order__info"}><i className="fas fa-bell order__icon"> </i>{element}</div>
+                    })}
                 </div>)
 };
 

@@ -22,7 +22,6 @@ const Dish = (props) => {
     const handleDelete = () => {
         const dateEnd = new Date();
         const statusChange = db.collection("orders").doc(ID.toString());
-
         return statusChange.update({
             status: "deleted",
             dateEnd: dateEnd.toLocaleString(),
@@ -37,14 +36,14 @@ const Dish = (props) => {
 
     return (
         <>
-            <div className={"col-2"}>{OrderID}</div>
-            <div className={"col-2"}>{tableID}</div>
-            <div className={"col-2"}>{product}</div>
-            <div className={"col-2"}>{quantity}</div>
-            <div className={"col-2"}>{date}</div>
-            <div className={"col-2 table__btn"}>
-                <button onClick={handleDelete} className={"btn"}>Anuluj</button>
-                <button onClick={handleComplete} className={"btn"}>Zakończ</button>
+            <div key={"a"} className={"col-2"}>{OrderID}</div>
+            <div key={"b"} className={"col-2"}>{tableID}</div>
+            <div key={"c"} className={"col-2"}>{product}</div>
+            <div key={"d"} className={"col-2"}>{quantity}</div>
+            <div key={"e"} className={"col-2"}>{date}</div>
+            <div key={"f"} className={"col-2 table__btn"}>
+                <div key={"fa"} onClick={handleDelete} className={"btn"}>Anuluj</div>
+                <div key={"fb"} onClick={handleComplete} className={"btn"}>Zakończ</div>
             </div>
         </>
     );

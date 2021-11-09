@@ -22,7 +22,7 @@ ReactDOM.render(
   <React.StrictMode>
       <BrowserRouter>
           <>
-              <Route exact path='/' component={App} />
+              <Route exact path='/menu/:table' component={App} />
               <Route exact path='/panel' component={Panel} />
               <Route path='/panel/waiter' component={Waiter} />
               <Route path='/panel/kitchen' component={Kitchen} />

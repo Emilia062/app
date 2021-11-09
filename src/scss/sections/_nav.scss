@@ -11,14 +11,9 @@
   }
 
     &__logo {
-      font-family: $logo-font;
-      color: #311c00;
-      text-shadow: 2px 2px 15px #3d2300;
-      font-weight: bold;
       position: absolute;
       top: 123px;
       left: 100px;
-      font-size: 7rem;
     }
 
   &__links {

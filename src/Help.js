@@ -22,7 +22,6 @@ const Help = (props) => {
     const handleDelete = () => {
         const dateEnd = new Date();
         const statusChange = db.collection("help").doc(ID.toString());
-
         return statusChange.update({
             status: "deleted",
             dateEnd: dateEnd.toLocaleString(),
@@ -51,8 +50,8 @@ const Help = (props) => {
             <div className={"col-2"}>{date}</div>
             <div className={"col-2"}>{toPolish(status)}</div>
             <div className={"col-2 table__btn"}>
-            <button onClick={handleDelete} className={"btn"}>Anuluj</button>
-            <button onClick={handleComplete} className={"btn"}>Zakończ</button>
+            <div onClick={handleDelete} className={"btn"}>Anuluj</div>
+            <div onClick={handleComplete} className={"btn"}>Zakończ</div>
             </div>
         </>
     );

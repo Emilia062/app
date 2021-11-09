@@ -1,3 +1,4 @@
+//Menu styling
 .section {
 
   &__pic {
@@ -22,7 +23,7 @@
     padding: 10px;
   }
 }
-
+//One position in the menu styling
 .product {
 
   &__title {
@@ -94,6 +95,7 @@
   }
 }
 
+//Order form styling
 .order {
   padding: 10px;
 
@@ -128,5 +130,17 @@
     display: flex;
     justify-content: space-between;
     margin: 20px 0;
+  }
+
+  &__info {
+    font-size: 3rem;
+    font-weight: 700;
+    color: $lightGreen;
+    text-align: center;
+    margin: 10px 0;
+  }
+
+  &__icon {
+    margin: 0 10px;
   }
 }

@@ -17,8 +17,9 @@ const Menu = () => {
     const [pickedItems,setPickedItems] = useState([]);
     const [status, setStatus] = useState("active");
 
-    // const param = useParams();
-    // console.log(param)
+    const param = useParams();
+    console.log(param)
+    console.log(param.table)
 
     // useEffect(() => {
     //     setPizza([]);
@@ -90,7 +91,7 @@ const Menu = () => {
                     </div>
                 )
             })}
-            <Order pickedItems={pickedItems} setPickedItems={setPickedItems}/>
+            <Order pickedItems={pickedItems} setPickedItems={setPickedItems} param={param}/>
         </form>
     );
 };
