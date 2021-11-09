@@ -2,7 +2,7 @@ import React from 'react';
 import {db} from "./firebase";
 
 const Dish = (props) => {
-    const {ID, tableID, product, quantity, status, date, OrderID} = props;
+    const {ID, tableID, product, quantity, date, OrderID} = props;
 
     const handleComplete = () => {
         const dateEnd = new Date();

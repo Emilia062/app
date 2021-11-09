@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import {db} from "./firebase";
 import Dish from "./Dish"
 
-const Kitchen = (props) => {
+const Kitchen = () => {
     const [ordersActive, setOrdersActive] = useState([]);
     const [ordersCompleted, setOrdersCompleted] = useState([]);
     const [ordersDeleted, setOrdersDeleted] = useState([]);
@@ -34,7 +34,7 @@ const Kitchen = (props) => {
                     ])
                 });
             });
-    }, [])
+    }, [ordersActive])
 
     useEffect(() => {
         setOrdersCompleted([]);
@@ -50,7 +50,7 @@ const Kitchen = (props) => {
                     ])
                 });
             });
-    }, [])
+    }, [ordersCompleted])
 
     useEffect(() => {
         setOrdersDeleted([]);
@@ -66,7 +66,7 @@ const Kitchen = (props) => {
                     ])
                 });
             });
-    },[])
+    },[ordersDeleted])
 
     let sortOrdersActive = ordersActive.sort((a ,b) => {
         return b.OrderID - a.OrderID;

@@ -29,7 +29,7 @@ const Order = (props) => {
         }
     })
 
-    const isActive = pickedItems.map((item, index) =>{
+    const isActive = pickedItems.map((item, index) => {
         if(item.status === "active" && item.quantity > 0){
             return (
                 <ul key={index} className={"order__row row"}>

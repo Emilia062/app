@@ -4,9 +4,9 @@ import Help from "./Help";
 
 
 const Waiter = () => {
-    const [helpActive, setHelpActive] = useState([])
-    const [helpDeleted, setHelpDeleted] = useState([])
-    const [helpCompleted, setHelpCompleted] = useState([])
+    const [helpActive, setHelpActive] = useState([]);
+    const [helpDeleted, setHelpDeleted] = useState([]);
+    const [helpCompleted, setHelpCompleted] = useState([]);
 
     const toPolish = (status) => {if(status === "completed"){
         return "Zakończone"
@@ -30,7 +30,8 @@ const Waiter = () => {
                     ])
                 });
             });
-    }, [])
+    },[helpActive])
+
 
     useEffect(() => {
         setHelpCompleted([]);
@@ -46,7 +47,7 @@ const Waiter = () => {
                     ])
                 });
             });
-    }, [])
+    },[helpCompleted])
 
     useEffect(() => {
         setHelpDeleted([]);
@@ -62,12 +63,13 @@ const Waiter = () => {
                     ])
                 });
             });
-    },[])
+    },[helpDeleted])
+
 
     let helpActiveJSX = helpActive.map((item,index) => {
             return(
                 <form className={"row"} key={index}>
-                    <Help msg={item.msg} tableID={item.tableID} date={item.date} status={item.status} ID={item.ID}/>
+                    <Help msg={item.msg} tableID={item.tableID} date={item.date} ID={item.ID}/>
                 </form>
             )
         })

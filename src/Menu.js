@@ -46,7 +46,7 @@ const Menu = () => {
                return(
                    <div key={index}>
                        <Product title={item.title} ingredients={item.ingredients}
-                                price={item.price} pickedItems={pickedItems} setPickedItems={setPickedItems} status={status}/>
+                                price={item.price} setPickedItems={setPickedItems} status={status}/>
                    </div>
                )
             })}
@@ -56,7 +56,7 @@ const Menu = () => {
                 return (
                     <div key={index}>
                         <Product title={item.title} ingredients={item.ingredients}
-                                 price={item.price} pickedItems={pickedItems} setPickedItems={setPickedItems} status={status}/>
+                                 price={item.price} setPickedItems={setPickedItems} status={status}/>
                     </div>
                 )
             })}
@@ -66,7 +66,7 @@ const Menu = () => {
                 return (
                     <div key={index}>
                         <Product title={item.title} ingredients={item.ingredients}
-                                 price={item.price} pickedItems={pickedItems} setPickedItems={setPickedItems} status={status}/>
+                                 price={item.price} setPickedItems={setPickedItems} status={status}/>
                     </div>
                 )
             })}
@@ -76,7 +76,7 @@ const Menu = () => {
                 return (
                     <div key={index}>
                         <Product title={item.title} ingredients={item.ingredients}
-                                 price={item.price} pickedItems={pickedItems} setPickedItems={setPickedItems} status={status}/>
+                                 price={item.price} setPickedItems={setPickedItems} status={status}/>
                     </div>
                 )
             })}
@@ -86,7 +86,7 @@ const Menu = () => {
                 return (
                     <div key={index}>
                         <Product title={item.title} ingredients={item.description}
-                                 price={item.price} pickedItems={pickedItems} setPickedItems={setPickedItems} status={status}/>
+                                 price={item.price} setPickedItems={setPickedItems} status={status}/>
                     </div>
                 )
             })}

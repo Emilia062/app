@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 
 const Product = (props) => {
-    const {title, ingredients, price, pickedItems, setPickedItems, status} = props;
+    const {title, ingredients, price, setPickedItems, status} = props;
     const [state, setState] = useState("closed");
     const [quantity, setQuantity] = useState(0);
 
