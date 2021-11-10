@@ -8,6 +8,7 @@ const Kitchen = (props) => {
     const [ordersCompleted, setOrdersCompleted] = useState([]);
     const [ordersDeleted, setOrdersDeleted] = useState([]);
 
+    //function to translate state to Polish
     const toPolish = (status) => {if(status === "completed"){
         return "Zakończone"
     } else if(status === "deleted"){
@@ -15,12 +16,8 @@ const Kitchen = (props) => {
     } else if(status === "active"){
         return "Aktywny"
     }}
-    console.log("I")
-    console.log(ordersActive)
-    console.log(ordersDeleted)
-    console.log(ordersCompleted)
 
-
+    //function to get orders which status is active
     useEffect(() => {
         db.collection("orders").where("status", "==", "active")
             .onSnapshot((querySnapshot) => {
@@ -35,6 +32,7 @@ const Kitchen = (props) => {
             });
     }, [])
 
+    //function to get orders which status is completed
     useEffect(() => {
         db.collection("orders").where("status", "==", "completed")
             .onSnapshot((querySnapshot) => {
@@ -49,6 +47,7 @@ const Kitchen = (props) => {
             });
     }, [])
 
+    ////function to get orders which status is deleted
     useEffect(() => {
         db.collection("orders").where("status", "==", "deleted")
             .onSnapshot((querySnapshot) => {
@@ -63,25 +62,26 @@ const Kitchen = (props) => {
             });
     },[])
 
+    //sorting by ID number
     let sortOrdersActive = ordersActive.sort((a ,b) => {
         return b.OrderID - a.OrderID;
     });
-
     let ordersActiveJSX = sortOrdersActive.map((item, index) => {
             return(
-                <form className={"row"} key={index}>
+                <form className={"row service__row"} key={index}>
                     <Dish OrderID={item.OrderID} tableID={item.tableID} product={item.product} quantity={item.quantity}
                           date={item.date} ID={item.ID}/>
                 </form>
             )
     })
 
+    //sorting by ID number
     let sortOrdersDeleted = ordersDeleted.sort((a,b) => {
         return a.OrderID - b.OrderID;
     });
     let ordersDeletedJSX = sortOrdersDeleted.map((item, index) => {
             return(
-                <ul key={index} className={"row"}>
+                <ul key={index} className={"row service__row"}>
                     <li className={"col-2"}>{item.OrderID}</li>
                     <li className={"col-2"}>{item.tableID}</li>
                     <li className={"col-2"}>{item.product}</li>
@@ -91,12 +91,14 @@ const Kitchen = (props) => {
                 </ul>
             )
     })
+
+    //sorting by ID number
     let sortOrdersCompleted = ordersCompleted.sort((a,b) => {
         return a.OrderID - b.OrderID;
     });
     let ordersCompletedJSX = sortOrdersCompleted.map((item, index) => {
             return(
-                <ul key={index} className={"row"}>
+                <ul key={index} className={"row service__row"}>
                     <li className={"col-2"}>{item.OrderID}</li>
                     <li className={"col-2"}>{item.tableID}</li>
                     <li className={"col-2"}>{item.product}</li>
@@ -107,17 +109,9 @@ const Kitchen = (props) => {
             )
     })
 
-    const handleLogOut = () => {
-        localStorage.removeItem("account");
-        setState("closed");
-        setName("");
-        setPassword("");
-    }
-
     return (
         <div className={"container--grid"}>
             <div className={"service"}>
-                <button className={"btn service__logOut"} onClick={handleLogOut}>Wyloguj</button>
                 <h1 className={"service__title"}> Kuchnia</h1>
                 <h3 className={"service__table"}>Zamówienia aktywne</h3>
             </div>
@@ -139,7 +133,7 @@ const Kitchen = (props) => {
                 <li className={"col-2"}>Status</li>
                 <li className={"col-2"}>Data zakończenia</li>
             </ul>
-                {ordersCompletedJSX}
+            {ordersCompletedJSX}
             <h3 className={"service__table"}>Zamówienia anulowane</h3>
             <ul className={"row table__titles"}>
                 <li className={"col-2"}>ID</li>
@@ -149,7 +143,7 @@ const Kitchen = (props) => {
                 <li className={"col-2"}>Status</li>
                 <li className={"col-2"}>Data anulowania</li>
             </ul>
-                {ordersDeletedJSX}
+            {ordersDeletedJSX}
         </div>
     );
 };

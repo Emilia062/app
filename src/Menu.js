@@ -7,42 +7,27 @@ import {menu} from "./assets/menu/menu";
 import {pasta} from "./assets/menu/menu";
 import {salads} from "./assets/menu/menu";
 import {beverages} from "./assets/menu/menu";
-import pizza3 from "./assets/pizza3.jpg";
+import pizzaFoto from "./assets/pizza3.jpg";
 import pastaFoto from "./assets/pasta.jpg";
-import salad from "./assets/salad.jpg";
-import foccaciaFoto from "./assets/pizza1.jpg";
-import coffee from "./assets/coffee.jpg";
+import saladFoto from "./assets/salad.jpg";
+import foccaciaFoto from "./assets/foccacia.jpg";
+import coffeeFoto from "./assets/coffee.jpg";
 
 const Menu = () => {
     const [pickedItems,setPickedItems] = useState([]);
     const [status, setStatus] = useState("active");
 
+    //Variable which sets table number
     const param = useParams();
-    console.log(param)
-    console.log(param.table)
-
-    // useEffect(() => {
-    //     setPizza([]);
-    //     db.collection("pizza")
-    //         .get()
-    //         .then((querySnapshot) => {
-    //             querySnapshot.forEach((doc) => {
-    //                 setPizza((state) => [
-    //                                     ...state,
-    //                                     {
-    //                                         ...doc.data(),
-    //                                         id: doc.id,
-    //                                     }
-    //                                 ])
-    //             });
-    //     });
-    // }, []);
-
 
     return (
         <form>
-            <img src={pizza3} alt={"pizza"} className={"section__pic"}/>
-            <h2 id={"pizza"} className={"section__title"}>Pizza</h2>
+            <img src={pizzaFoto} alt={"pizza"} className={"section__pic"}/>
+            <div className={"section__container"}>
+                <div className={"line section__line"}> </div>
+                <h2 id={"pizza"} className={"section__title"}>Pizza</h2>
+                <div className={"line section__line"}> </div>
+            </div>
             {pizza.map((item, index) => {
                return(
                    <div key={index}>
@@ -52,7 +37,11 @@ const Menu = () => {
                )
             })}
             <img src={pastaFoto} alt={"pasta"} className={"section__pic"}/>
-            <h2 id={"pasta"} className={"section__title"}>Makarony</h2>
+            <div className={"section__container"}>
+                <div className={"line section__line"}> </div>
+                <h2 id={"pasta"} className={"section__title"}>Makarony</h2>
+                <div className={"line section__line"}> </div>
+            </div>
             {pasta.map((item, index) => {
                 return (
                     <div key={index}>
@@ -62,7 +51,11 @@ const Menu = () => {
                 )
             })}
             <img src={foccaciaFoto} alt={"foccacia"} className={"section__pic"}/>
-            <h2 id={"foccacia"} className={"section__title"}>Foccacia</h2>
+            <div className={"section__container"}>
+                <div className={"line section__line"}> </div>
+                <h2 id={"foccacia"} className={"section__title"}>Foccacia</h2>
+                <div className={"line section__line"}> </div>
+            </div>
             {menu.map((item, index) => {
                 return (
                     <div key={index}>
@@ -71,8 +64,12 @@ const Menu = () => {
                     </div>
                 )
             })}
-            <img src={salad} alt={"salad"} className={"section__pic"}/>
-            <h2 id={"salads"} className={"section__title"}>Sałatki</h2>
+            <img src={saladFoto} alt={"salad"} className={"section__pic"}/>
+            <div className={"section__container"}>
+                <div className={"line section__line"}> </div>
+                <h2 id={"salads"} className={"section__title"}>Sałatki</h2>
+                <div className={"line section__line"}> </div>
+            </div>
             {salads.map((item, index) => {
                 return (
                     <div key={index}>
@@ -81,8 +78,12 @@ const Menu = () => {
                     </div>
                 )
             })}
-            <img src={coffee} alt={"coffee"} className={"section__pic"}/>
-            <h2 id={"beverages"} className={"section__title"}>Kawa i napoje</h2>
+            <img src={coffeeFoto} alt={"coffee"} className={"section__pic"}/>
+            <div className={"section__container"}>
+                <div className={"line section__line"}> </div>
+                <h2 id={"beverages"} className={"section__title"}>Kawa i napoje</h2>
+                <div className={"line section__line"}> </div>
+            </div>
             {beverages.map((item, index) => {
                 return (
                     <div key={index}>

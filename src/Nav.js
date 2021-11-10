@@ -1,7 +1,5 @@
 import React from 'react';
-import background from './assets/background.jpg'
-import {NavLink, Link} from "react-router-dom";
-
+import background from './assets/background.jpg';
 
 const Nav = () => {
     return (
@@ -10,12 +8,10 @@ const Nav = () => {
                 <img src={background} alt={"background"} className={"nav__header--background"}/>
                 <h1 className={"nav__logo logo"}>Rosmarino</h1>
             </div>
-            <div className={"nav__links"}>
-                <NavLink to={{pathname: "/menu", hash: "#pizza"}} className={"nav__link"}>Pizza</NavLink>
-                <Link to={{pathname: "/menu/", hash: "#pasta"}} className={"nav__link"}>Makarony</Link>
-                <Link to="menu/#foccacia" className={"nav__link"}>Foccacia</Link>
-                <NavLink to="/salads" className={"nav__link"}>Sałatki</NavLink>
-                <NavLink to="/beverages" className={"nav__link"}>Kawy i napoje</NavLink>
+            <div className={"nav__menu"}>
+                <div className={"line"}> </div>
+                <h1 className={"nav__menu--title"}>Menu</h1>
+                <div className={"line"}> </div>
             </div>
         </div>
     );

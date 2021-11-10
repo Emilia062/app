@@ -2,19 +2,15 @@ import React from 'react';
 
 const PickedItem = (props) => {
    const {title, quantity, sum, pickedItems, setPickedItems, index} = props;
-    console.log(index);
 
-    let toOrder = [];
+    //function to delete the product of the order
     const handleDeleted = () => {
-        let toOrder = pickedItems.filter((element, i) => {
+        let toOrder = [];
+        toOrder = pickedItems.filter((element, i) => {
             return  i !== index;
-
         })
         setPickedItems(toOrder);
     }
-    console.log(pickedItems)
-    console.log(toOrder);
-
 
     return (
         <>

@@ -9,10 +9,7 @@ const Waiter = (props) => {
     const [helpDeleted, setHelpDeleted] = useState([]);
     const [helpCompleted, setHelpCompleted] = useState([]);
 
-    console.log(helpActive)
-    console.log(helpDeleted)
-    console.log(helpCompleted)
-
+    //function to translate status to Polish
     const toPolish = (status) => {if(status === "completed"){
         return "Zakończone"
     } else if(status === "deleted"){
@@ -21,6 +18,7 @@ const Waiter = (props) => {
         return "Aktywny"
     }}
 
+    //function to get help requests which status is active
     useEffect(() => {
         db.collection("help").where("status", "==", "active")
             .onSnapshot((querySnapshot) => {
@@ -35,7 +33,7 @@ const Waiter = (props) => {
             });
     },[])
 
-
+    //function to get help requests which status is completed
     useEffect(() => {
         db.collection("help").where("status", "==", "completed")
             .onSnapshot((querySnapshot) => {
@@ -50,6 +48,7 @@ const Waiter = (props) => {
             });
     },[])
 
+    //function to get help requests which status is deleted
     useEffect(() => {
         db.collection("help").where("status", "==", "deleted")
             .onSnapshot((querySnapshot) => {
@@ -64,10 +63,9 @@ const Waiter = (props) => {
             });
     },[])
 
-
     let helpActiveJSX = helpActive.map((item,index) => {
             return(
-                <form className={"row"} key={index}>
+                <form className={"row service__row"} key={index}>
                     <Help msg={item.msg} tableID={item.tableID} date={item.date} ID={item.ID} status={item.status}/>
                 </form>
             )
@@ -75,7 +73,7 @@ const Waiter = (props) => {
 
     let helpDeletedJSX = helpDeleted.map((item, index) => {
             return(
-                <ul key={index} className={"row"}>
+                <ul key={index} className={"row service__row"}>
                     <li className={"col-2"} key={"a"}>{item.ID}</li>
                     <li className={"col-2"} key={"b"}>{item.msg}</li>
                     <li className={"col-2"} key={"c"}>{item.tableID}</li>
@@ -88,7 +86,7 @@ const Waiter = (props) => {
 
     let helpCompletedJSX = helpCompleted.map((item, index) => {
             return(
-                <ul key={index} className={"row"}>
+                <ul key={index} className={"row service__row"}>
                     <li className={"col-2"} key={"a"}>{item.ID}</li>
                     <li className={"col-2"} key={"b"}>{item.msg}</li>
                     <li className={"col-2"} key={"c"}>{item.tableID}</li>
@@ -99,18 +97,10 @@ const Waiter = (props) => {
             )
     })
 
-    const handleLogOut = () => {
-        localStorage.removeItem("account");
-        setState("closed");
-        setName("");
-        setPassword("");
-    }
-
     return (
         <div className={"container--grid"}>
             <div className={"service"}>
-                <button className={"btn service__logOut"} onClick={handleLogOut}>Wyloguj</button>
-                <h1 className={"service__title"}> Obsługa kelnerska</h1>
+                <h1 className={"service__title"}>Obsługa kelnerska</h1>
                 <h3 className={"service__table"}>Prośby o pomoc</h3>
             </div>
             <ul className={"row table__titles"}>
@@ -144,7 +134,6 @@ const Waiter = (props) => {
                 </ul>
                 {helpDeletedJSX}
             </div>
-
         </div>
     );
 };

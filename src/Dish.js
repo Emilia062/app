@@ -4,6 +4,7 @@ import {db} from "./firebase";
 const Dish = (props) => {
     const {ID, tableID, product, quantity, date, OrderID} = props;
 
+    //function to change status of order to completed
     const handleComplete = () => {
         const dateEnd = new Date();
         const statusChange = db.collection("orders").doc(ID.toString());
@@ -19,6 +20,7 @@ const Dish = (props) => {
             });
     }
 
+    //function to change status of order to deleted
     const handleDelete = () => {
         const dateEnd = new Date();
         const statusChange = db.collection("orders").doc(ID.toString());

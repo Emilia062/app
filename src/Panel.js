@@ -12,8 +12,8 @@ const Panel = () => {
         name,
         password
     }
-    console.log(state)
 
+    //function to get account data from LocalStorage
     useEffect(() => {
         if(localStorage.getItem("account") !== null) {
             let account = JSON.parse(localStorage.getItem("account"));
@@ -24,8 +24,9 @@ const Panel = () => {
                 setState("openKitchen");
             }
         }
-    },[name, password])
+    },[name, password]);
 
+    //function to save account data in LocalStorage
     function saveAccountToLocalStorage(newObject){
         let dataFromLocalStorage =[];
         if(localStorage.getItem("account") !== null){
@@ -39,6 +40,7 @@ const Panel = () => {
         alert("Jesteś zalogowany");
     }
 
+    //function to log in
     const handleSubmit = (e) => {
         e.preventDefault();
 
@@ -76,9 +78,34 @@ const Panel = () => {
         }
     }
 
+    //function to log out
+    const handleLogOut = () => {
+        localStorage.removeItem("account");
+        setState("closed");
+        setName("");
+        setPassword("");
+    }
+
+    //to show user panel
+    let toLogOut = (state) => {
+        if(state === "openKitchen" || state === "openWaiter"){
+            return (
+                <div className={"service__account"}>
+                    <i className="far fa-user service__user"> </i>
+                    <span className={"service__logOut"} onClick={handleLogOut}>Wyloguj</span>
+                </div>
+            )
+        }
+    }
+
     return (
         <div className={"panel"}>
-            <h1 className={"logo panel__logo"}>Rosmarino</h1>
+            <div className={"panel__logo--container"}>
+                {toLogOut(state)}
+                <div className={"panel__logo"}>
+                    <h1 className={"logo panel__logo--name"}>Rosmarino</h1>
+                </div>
+            </div>
             <h2 className={"panel__title"}>Panel administracyjny</h2>
             {state === "closed" && (
                 <>
@@ -96,7 +123,6 @@ const Panel = () => {
                     </form>
                 </>
             )}
-
             {state === "openWaiter" && (
                 <>
                     <Waiter setState={setState} setName={setName} setPassword={setPassword}/>

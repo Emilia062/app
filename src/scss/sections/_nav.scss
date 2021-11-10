@@ -1,6 +1,4 @@
 .nav {
-  background: rgb(11,50,25);
-  background: linear-gradient(180deg, rgba(11,50,25,0.8914916308320203) 37%, rgba(36,107,65,0.9475140397956058) 87%);
 
   &__header {
 
@@ -9,34 +7,24 @@
       height: 370px;
     }
   }
-
     &__logo {
       position: absolute;
       top: 123px;
       left: 100px;
     }
 
-  &__links {
+  &__menu {
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 20px 0;
     background: linear-gradient(0deg, rgba(11,50,25,0.8914916308320203) 37%, rgba(36,107,65,0.9475140397956058) 87%);
-    box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
-  }
+    box-shadow: rgba(0, 0, 0, 0.25) 0 54px 55px, rgba(0, 0, 0, 0.12) 0 -12px 30px, rgba(0, 0, 0, 0.12) 0 4px 6px, rgba(0, 0, 0, 0.17) 0 12px 13px, rgba(0, 0, 0, 0.09) 0 -3px 5px;
 
-  &__link {
-    text-decoration: none;
-    font-family: $main-font;
-    color: $fontColor;
-    font-weight: bold;
-    font-size: 1.5rem;
-    margin: 5px;
-
-    &:active{
-        color: $lightGreen;
-      }
+    &--title {
+      color: $fontColor;
+      font-family: $logo-font;
+      font-size: 5rem;
     }
   }
-
-
+}

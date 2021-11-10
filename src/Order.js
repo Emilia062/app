@@ -1,14 +1,12 @@
 import React, {useState} from 'react';
 import PickedItem from "./PickedItem";
 import {db} from "./firebase";
-import {tableID} from "./index.js"
-
 
 const Order = (props) => {
     const {pickedItems, setPickedItems, param} = props
     const [info, setInfo] = useState([]);
 
-
+    //Variable which set total sum
     let sumTotal = 0;
     pickedItems.map((item) => {
         if(item.status === "active"){
@@ -16,6 +14,7 @@ const Order = (props) => {
         }
     })
 
+    //Check if picked items are active and if the quantity of them is bigger than 0
     const isActive = pickedItems.map((item, index) => {
         if(item.status === "active" && item.quantity > 0){
             return (
@@ -26,6 +25,7 @@ const Order = (props) => {
         }
     })
 
+    //Function to save the data of the order in firebase
     const handleGetOrder = (e) =>{
         e.preventDefault();
         const date = new Date();
@@ -56,6 +56,7 @@ const Order = (props) => {
         setPickedItems([]);
     };
 
+    //function to save the data of help request in firebase
     const handleHelp = (e) => {
         e.preventDefault();
         const date = new Date();
@@ -91,8 +92,8 @@ const Order = (props) => {
                     <h2 className={"order__sum--title"}>SUMA</h2>
                     <h2 className={"order__sum"}>{sumTotal} zł</h2>
                     <div className={"order__buttons"}>
-                    <button onClick={handleGetOrder} className={"btn"}>ZAMÓW</button>
-                    <button onClick={handleHelp} className={"btn"}>Poproś o pomoc kelnera</button>
+                        <button onClick={handleGetOrder} className={"btn"}>ZAMÓW</button>
+                        <button onClick={handleHelp} className={"btn"}>Poproś o pomoc kelnera</button>
                     </div>
                     {info.map((element,index) => {
                         return <div key={index} className={"order__info"}><i className="fas fa-bell order__icon"> </i>{element}</div>

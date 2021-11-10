@@ -22,8 +22,13 @@ body {
   font-family: $logo-font;
   font-size: 7rem;
   color: #311c00;
-  text-shadow: 2px 2px 15px #3d2300;
+  text-shadow: 2px 2px 25px #3d2300;
   font-weight: bold;
+}
+
+.line {
+  width: 140px;
+  border-bottom: 5px solid whitesmoke;
 }
 
 
@@ -54,5 +59,3 @@ $column-base-width: 100% / $columns;
     }
   }
 }
-
-

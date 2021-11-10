@@ -4,6 +4,7 @@ import {db} from "./firebase";
 const Help = (props) => {
     const {msg, tableID, date, status, ID} = props;
 
+    //function to change status of help request to completed
     const handleComplete = () => {
         const dateEnd = new Date();
         const statusChange = db.collection("help").doc(ID.toString());
@@ -19,6 +20,7 @@ const Help = (props) => {
             });
     }
 
+    //function to change status of help request to deleted
     const handleDelete = () => {
         const dateEnd = new Date();
         const statusChange = db.collection("help").doc(ID.toString());
@@ -34,6 +36,7 @@ const Help = (props) => {
             });
     }
 
+    //function to translate status to Polish
     const toPolish = (status) => {if(status === "completed"){
         return "Zakończone"
     } else if(status === "deleted"){
@@ -50,8 +53,8 @@ const Help = (props) => {
             <div className={"col-2"}>{date}</div>
             <div className={"col-2"}>{toPolish(status)}</div>
             <div className={"col-2 table__btn"}>
-            <div onClick={handleDelete} className={"btn"}>Anuluj</div>
-            <div onClick={handleComplete} className={"btn"}>Zakończ</div>
+                <div onClick={handleDelete} className={"btn"}>Anuluj</div>
+                <div onClick={handleComplete} className={"btn"}>Zakończ</div>
             </div>
         </>
     );
