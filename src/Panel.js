@@ -90,7 +90,7 @@ const Panel = () => {
     let toLogOut = (state) => {
         if(state === "openKitchen" || state === "openWaiter"){
             return (
-                <div className={"service__account"}>
+                <div className={"service__account"} >
                     <i className="far fa-user service__user"> </i>
                     <span className={"service__logOut"} onClick={handleLogOut}>Wyloguj</span>
                 </div>
