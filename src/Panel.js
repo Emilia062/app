@@ -92,7 +92,7 @@ const Panel = () => {
             return (
                 <div className={"service__account"} >
                     <i className="far fa-user service__user"> </i>
-                    <span className={"service__logOut"} onClick={handleLogOut}>Wyloguj</span>
+                    <button className={"service__logOut"} onClick={handleLogOut}>Wyloguj</button>
                 </div>
             )
         }

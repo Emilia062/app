@@ -91,6 +91,7 @@
   }
 
   &__logOut {
+    background-color: $backgroundColor;
     font-family: $main-font;
     color: $lightGreen;
     font-weight: 800;
