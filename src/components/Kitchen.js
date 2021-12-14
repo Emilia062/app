@@ -1,9 +1,8 @@
 import React, {useEffect, useState} from 'react';
-import {db} from "./firebase";
+import {db} from "../firebase";
 import Dish from "./Dish"
 
-const Kitchen = (props) => {
-    const {setState, setName, setPassword} = props
+const Kitchen = () => {
     const [ordersActive, setOrdersActive] = useState([]);
     const [ordersCompleted, setOrdersCompleted] = useState([]);
     const [ordersDeleted, setOrdersDeleted] = useState([]);

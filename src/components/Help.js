@@ -1,5 +1,5 @@
 import React from 'react';
-import {db} from "./firebase";
+import {db} from "../firebase";
 
 const Help = (props) => {
     const {msg, tableID, date, status, ID} = props;

@@ -1,5 +1,5 @@
 import React from 'react';
-import {db} from "./firebase";
+import {db} from "../firebase";
 
 const Dish = (props) => {
     const {ID, tableID, product, quantity, date, OrderID} = props;

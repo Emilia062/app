@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import PickedItem from "./PickedItem";
-import {db} from "./firebase";
+import {db} from "../firebase";
 
 const Order = (props) => {
     const {pickedItems, setPickedItems, param} = props

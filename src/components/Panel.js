@@ -125,12 +125,12 @@ const Panel = () => {
             )}
             {state === "openWaiter" && (
                 <>
-                    <Waiter setState={setState} setName={setName} setPassword={setPassword}/>
+                    <Waiter/>
                 </>
             )}
             {state === "openKitchen" && (
                 <>
-                    <Kitchen setState={setState} setName={setName} setPassword={setPassword}/>
+                    <Kitchen/>
                 </>
             )}
         </div>

@@ -1,70 +1,59 @@
-# Getting Started with Create React App
+# Order by QR code
+> Application for ordering food by scanning the QR code which 
+> is on the restaurant table.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Table of Contents
+* [General Info](#general-information)
+* [Technologies Used](#technologies-used)
+* [Features](#features)
+* [Setup](#setup)
+* [Project Status](#project-status)
+* [Room for Improvement](#room-for-improvement)
+* [Contact](#contact)
 
-## Available Scripts
+## General Information
+Clients can scan the QR code and see the restaurant menu.
+They can also order food or ask waiter for a help.\
+Second part of the application is for the restaurant stuff.
+Waiters have website where there are asks for help with number
+of table and date of sent request for help.
+Cooks have website with information about orders.
 
-In the project directory, you can run:
+## Technologies Used
+- React - version 17.0.2
+- react-router-dom - version 5.3.0
+- sass- version 1.43.4
+- firebase 
 
-### `npm start`
+## Features
+List the ready features here:
+- Adding orders to the database
+- Adding help requests to the database
+- showing orders on the website for cooks. Employees can also
+complete or cancel the order.
+- showing help requests on the website for waiters. Employees can also
+  complete or cancel the help request.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## Setup
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+`npm start`
 
-### `npm test`
+[http://localhost:3000/menu/1](http://localhost:3000/menu/1) \
+The website with menu. Number in the url is the table number.\
+[http://localhost:3000/panel](http://localhost:3000/panel) \
+The page where the employees log in. \
+[http://localhost:3000/panel/waiter](http://localhost:3000/panel/waiter) \
+The page with help requests \
+[http://localhost:3000/panel/waiter](http://localhost:3000/panel/kitchen) \
+The page with orders
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Project Status
+Project is: _in progress_ 
 
-### `npm run build`
+## Room for Improvement
+Room for improvement:
+- status of the order
+- information about adding the product to the order
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## Contact
+Created by Emilia Kieglerska

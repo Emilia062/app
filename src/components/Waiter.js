@@ -1,10 +1,9 @@
 import React, {useEffect, useState} from 'react';
-import {db} from "./firebase";
+import {db} from "../firebase";
 import Help from "./Help";
 
 
-const Waiter = (props) => {
-    const {setState, setName, setPassword} = props
+const Waiter = () => {
     const [helpActive, setHelpActive] = useState([]);
     const [helpDeleted, setHelpDeleted] = useState([]);
     const [helpCompleted, setHelpCompleted] = useState([]);
