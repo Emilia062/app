@@ -39,7 +39,7 @@ complete or cancel the order.
 `npm start`
 
 [http://localhost:3000/menu/1](http://localhost:3000/menu/1) \
-The website with menu. Number in the url is the table number.\
+The website with menu. Number in the url is the table number. Mobile version\
 [http://localhost:3000/panel](http://localhost:3000/panel) \
 The page where the employees log in. \
 [http://localhost:3000/panel/waiter](http://localhost:3000/panel/waiter) \
