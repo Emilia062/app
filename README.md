@@ -1,6 +1,5 @@
 # Order by QR code
-> Application for ordering food by scanning the QR code which 
-> is on the restaurant table.
+> Application for ordering food by scanning the QR code from the restaurant table.
 
 ## Table of Contents
 * [General Info](#general-information)
@@ -15,9 +14,9 @@
 Clients can scan the QR code and see the restaurant menu.
 They can also order food or ask waiter for a help.\
 Second part of the application is for the restaurant stuff.
-Waiters have website where there are asks for help with number
+Waiters have the website where there are asks for help with number
 of table and date of sent request for help.
-Cooks have website with information about orders.
+Cooks have the website with information about orders.
 
 ## Technologies Used
 - React - version 17.0.2
@@ -26,9 +25,8 @@ Cooks have website with information about orders.
 - firebase 
 
 ## Features
-List the ready features here:
-- Adding orders to the database
-- Adding help requests to the database
+- adding orders to the database
+- adding help requests to the database
 - showing orders on the website for cooks. Employees can also
 complete or cancel the order.
 - showing help requests on the website for waiters. Employees can also
